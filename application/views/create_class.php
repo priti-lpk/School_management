@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Teacher</title>
+        <title>Class</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Create Teacher</h4>
+                                    <h4 class="page-title">Create Class</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,59 +58,30 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_teacher/edit_teacher/' . $users['id']) : site_url('Add_teacher/insert_teacher'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_class/edit_class/' . $users['id']) : site_url('Add_class/insert_class'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">First Name</label>
-                                                    <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="text"  placeholder="First Name" id="t_fname" name="t_fname" value="<?php echo isset($users) ? set_value("t_fname", $users['t_fname']) : set_value(""); ?>" required="">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="medium" id="create_party">
+                                                            <option>Select Medium</option>
+                                                            <?php
+                                                            if (isset($users)) {
+                                                                ?>
+                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <option value="English" >English</option>
+                                                                <option value="Gujarati">Gujarati</option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Last Name</label>
-                                                    <div class="col-sm-4"style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Last Name" id="t_lastname" name="t_lastname" value="<?php echo isset($users) ? set_value("t_lastname", $users['t_lastname']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Contact</label>
-                                                    <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="text"  placeholder="Contact No." id="t_mobno" name="t_mobno" value="<?php echo isset($users) ? set_value("t_mobno", $users['t_mobno']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Village</label>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Class Name</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Village" id="village" name="village" value="<?php echo isset($users) ? set_value("village", $users['village']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Class Name" id="class_name" name="class_name" value="<?php echo isset($users) ? set_value("class_name", $users['class_name']) : set_value(""); ?>" required="">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Taluka</label>
-                                                    <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="Taluka" id="taluka" name="taluka" value="<?php echo isset($users) ? set_value("taluka", $users['taluka']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">District</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="District" id="district" name="district" value="<?php echo isset($users) ? set_value("district", $users['district']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-1 col-form-label">State</label>
-                                                    <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="State" id="state" name="state" value="<?php echo isset($users) ? set_value("state", $users['state']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Pin Code</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="number"  placeholder="Pin Code" id="pin_code" name="pin_code" value="<?php echo isset($users) ? set_value("pin_code", $users['pin_code']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Address</label>
-                                                    <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="Address" id="address" name="address" value="<?php echo isset($users) ? set_value("address", $users['address']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Image</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input type="file" id="t_image" name="t_image" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("t_image", $users['t_image']) : set_value(""); ?>" >
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-
                                                 </div>
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
@@ -126,20 +97,13 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Teacher</h4><br>
+                                            <h4 class="mt-0 header-title">View of Class</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Contact</th>
-                                                        <th>Village</th>
-                                                        <th>Taluka</th>
-                                                        <th>District</th>
-                                                        <th>State</th>
-                                                        <th>Pin Code</th>
-                                                        <th>Address</th>
-                                                        <th>Image</th>
+                                                        <th>Medium</th>
+                                                        <th>Class Name</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
@@ -155,9 +119,9 @@
                                                                 <td><?php echo $e['emp_name'] ?></td>
                                                                 <td><?php echo $e['emp_contact'] ?></td>
                                                                 <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                              ?>" height="60" width="60"></td>-->
+                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                    ?>" height="60" width="60"></td>-->
                                                                 <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                             ?></td>-->
+                                                                <!--<td><?php // echo $e['emp_type']                                   ?></td>-->
                                                                 <td><?php
                                                                     if ($e['emp_status'] == 'Active') {
                                                                         echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
@@ -176,7 +140,7 @@
                                                                             }
                                                                             if ($r['role_delete'] == 1) {
                                                                                 ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                              ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
+                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                   ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
                                                                             <?php
                                                                         }
                                                                     }

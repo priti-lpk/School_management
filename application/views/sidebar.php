@@ -28,12 +28,12 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Schedule <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Class</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Section</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Subject</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Syllabus</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Assignment</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Routine</a></li>
+                        <li><a href="<?php echo base_url('Add_class') ?>">Class</a></li>
+                        <li><a href="<?php echo base_url('Add_section') ?>">Section</a></li>
+                        <li><a href="<?php echo base_url('Add_subject') ?>">Subject</a></li>
+                        <li><a href="<?php echo base_url('Add_syllabus') ?>">Syllabus</a></li>
+                        <li><a href="<?php echo base_url('Add_assignment') ?>">Assignment</a></li>
+                        <li><a href="<?php echo base_url('Add_routine') ?>">Routine</a></li>
 
                     </ul>
                 </li>
@@ -55,17 +55,15 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Administrator <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Academic Year</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Role</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Permission</a></li>
+                        <li><a href="<?php echo base_url('Add_academic') ?>">Academic Year</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Announcement <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Notice</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Event</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Holiday</a></li>
+                        <li><a href="<?php echo base_url('Add_notice') ?>">Notice</a></li>
+                        <li><a href="<?php echo base_url('Add_event') ?>">Event</a></li>
+                        <li><a href="<?php echo base_url('Add_holiday') ?>">Holiday</a></li>
                     </ul>
                 </li>
                 <li>
