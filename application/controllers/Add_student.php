@@ -13,6 +13,7 @@ class Add_student extends CI_Controller {
     }
 
     public function Index() {
+        $this->load->model('Purchase', 'purchase');
         $this->load->view('create_student');
     }
 

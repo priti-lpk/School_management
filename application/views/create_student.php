@@ -108,15 +108,73 @@
                                                     <div class="col-sm-4" style="margin-left: -20px;">
                                                         <input class="form-control" type="date"  placeholder="Birth Date" id="s_dob" name="s_dob" value="<?php echo isset($users) ? set_value("s_dob", $users['s_dob']) : set_value(""); ?>" required="">
                                                     </div>
-                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Cast</label>
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Religion</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Cast" id="s_cast" name="s_cast" value="<?php echo isset($users) ? set_value("s_cast", $users['s_cast']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Religion" id="s_religion" name="s_religion" value="<?php echo isset($users) ? set_value("s_religion", $users['s_religion']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Standard</label>
-                                                    <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Standard" id="s_standard" name="s_standard" value="<?php echo isset($users) ? set_value("s_standard", $users['s_standard']) : set_value(""); ?>" required="">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Select Class</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="class_id" id="create_party">
+                                                            <option>Select Class</option>
+                                                            <?php
+                                                            if (isset($users)) {
+                                                                ?>
+                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <option value="English" >English</option>
+                                                                <option value="Gujarati">Gujarati</option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Section</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="section_id" id="create_party">
+                                                            <option>Select Section</option>
+                                                            <?php
+                                                            if (isset($users)) {
+                                                                ?>
+                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <option value="English" >English</option>
+                                                                <option value="Gujarati">Gujarati</option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Blood Group</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="blood_group" id="create_party">
+                                                            <option>Select Blood Group</option>
+                                                            <?php
+                                                            if (isset($users)) {
+                                                                ?>
+                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <option value="A+">A+</option>
+                                                                <option value="A-">A-</option>
+                                                                <option value="B+">B+</option>
+                                                                <option value="B-">B-</option>
+                                                                <option value="O+">O+</option>
+                                                                <option value="O-">O-</option>
+                                                                <option value="AB+">AB+</option>
+                                                                <option value="AB-">AB-</option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Image</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
@@ -165,9 +223,9 @@
                                                                 <td><?php echo $e['emp_name'] ?></td>
                                                                 <td><?php echo $e['emp_contact'] ?></td>
                                                                 <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                  ?>" height="60" width="60"></td>-->
+                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                         ?>" height="60" width="60"></td>-->
                                                                 <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                                 ?></td>-->
+                                                                <!--<td><?php // echo $e['emp_type']                                        ?></td>-->
                                                                 <td><?php
                                                                     if ($e['emp_status'] == 'Active') {
                                                                         echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
@@ -186,7 +244,7 @@
                                                                             }
                                                                             if ($r['role_delete'] == 1) {
                                                                                 ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                 ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
+                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                        ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
                                                                             <?php
                                                                         }
                                                                     }

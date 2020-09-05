@@ -58,29 +58,30 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_class/edit_class/' . $users['id']) : site_url('Add_class/insert_class'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_class/edit_class/' . $users[0]['id']) : site_url('Add_class/insert_class'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
                                                         <select class="form-control select2" name="medium" id="create_party">
                                                             <option>Select Medium</option>
                                                             <?php
-                                                            if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="English" >English</option>
-                                                                <option value="Gujarati">Gujarati</option>
-                                                                <?php
+                                                            foreach ($medium as $p) {
+                                                                if (isset($users)) {
+                                                                    ?>
+                                                                    <option <?php echo ($p->id == $users[0]['medium'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <option value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                }
                                                             }
                                                             ?>
                                                         </select>
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Class Name</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Class Name" id="class_name" name="class_name" value="<?php echo isset($users) ? set_value("class_name", $users['class_name']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Class Name" id="class_name" name="class_name" value="<?php echo isset($users) ? set_value("class_name", $users[0]['class_name']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
@@ -109,44 +110,16 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    if (!empty($users1)) {
+                                                    if (!empty($class)) {
                                                         $i = 1;
-                                                        foreach ($users1 as $e) {
-                                                            $iid = $e['id'];
+                                                        foreach ($class as $c) {
                                                             ?>
                                                             <tr>
-                                                                <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['emp_name'] ?></td>
-                                                                <td><?php echo $e['emp_contact'] ?></td>
-                                                                <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                    ?>" height="60" width="60"></td>-->
-                                                                <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                                   ?></td>-->
-                                                                <td><?php
-                                                                    if ($e['emp_status'] == 'Active') {
-                                                                        echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
-                                                                    } else {
-                                                                        echo "<input type='checkbox' switch='none' data-status='1' id='" . $e['id'] . "'  onclick='approveuser(this.id)'/><label for='" . $e['id'] . "'  data-on-label='On' data-off-label='Off' ></label></td>";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php
-                                                                    foreach ($right as $r) {
-                                                                        if ($r['role_edit'] == 1) {
-                                                                            ?>
-                                                                            <a href="<?php echo base_url() . 'Add_employee/getdata_employee/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                                <?php
-                                                                            }
-                                                                            if ($r['role_delete'] == 1) {
-                                                                                ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                   ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    echo "<button type = 'submit' href = '#addparty' class = 'btn btn-primary waves-effect waves-light' data-toggle = 'modal' data-id = '$iid' data-image = '" . $e['emp_image'] . "' data-url='" . base_url() . "' ><b>View Image</b></button>";
-                                                                    ?>
-                                                                </td>
+                                                                <td><?php echo $c['iid']; ?></td>
+                                                                <td><?php echo $c['medium_name'] ?></td>
+                                                                <td><?php echo $c['class_name'] ?></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_class/getdata_class/' . $c['iid'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_class/delete_class/' . $c['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }

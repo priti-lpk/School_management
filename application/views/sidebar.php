@@ -28,6 +28,7 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Schedule <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
+                        <li><a href="<?php echo base_url('Add_medium') ?>">Medium</a></li>
                         <li><a href="<?php echo base_url('Add_class') ?>">Class</a></li>
                         <li><a href="<?php echo base_url('Add_section') ?>">Section</a></li>
                         <li><a href="<?php echo base_url('Add_subject') ?>">Subject</a></li>
