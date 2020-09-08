@@ -16,11 +16,75 @@ class Add_section extends CI_Controller {
         $this->load->model('Section', 'section');
         $users = $this->section->all();
         $medium = $this->section->get_medium();
-//        $class = $this->section->get_class();
+        $class = $this->section->get_class();
         $data = array();
-        $data['class'] = $users;
+        $data['all'] = $users;
         $data['medium'] = $medium;
-        $this->load->view('create_section',$data);
+        $data['class'] = $class;
+        $this->load->view('create_section', $data);
+    }
+
+    public function get_class() {
+        $this->load->model('Section', 'section');
+        $medium = $this->input->post('medium');
+        $val = $this->section->getcls($medium);
+        $output = '<select class="form-control select2 chosen" name="class_id" id="class_id" required="">';
+        $output .= '<option>Select Class</option>';
+        foreach ($val as $row) {
+            $output .= '<option value="' . $row->id . '">' . $row->class_name . '</option>';
+        }
+        $output .= '</select>';
+        echo $output;
+    }
+
+    function insert_section() {
+        $this->form_validation->set_rules('medium', 'Medium', 'required');
+        $this->form_validation->set_rules('class_id', 'Class_id', 'required');
+        $this->form_validation->set_rules('section_name', 'Section_name', 'required');
+        $this->load->model('Section', 'section');
+        $this->load->helper(array('form', 'url'));
+        $save = array(
+            'medium' => $this->input->post('medium'),
+            'class_id' => $this->input->post('class_id'),
+            'section_name' => $this->input->post('section_name'),
+        );
+        $this->section->create($save);
+        redirect(base_url() . 'Add_section/');
+    }
+
+    function getdata_section($id) {
+        $this->load->model('Section', 'section');
+        $users1 = $this->section->edit_id($id);
+        $users = $this->section->all();
+        $medium = $this->section->get_medium();
+//        $class = $this->section->get_class();
+        $class_id = $this->section->fetch_class_id($id);
+        $data = array();
+        $data['all'] = $users;
+//        $data['class'] = $class;
+        $data['medium'] = $medium;
+        $data['users'] = $users1;
+        $data['class'] = $class_id;
+        $this->load->view('create_section', $data);
+    }
+
+    function edit_section($id) {
+        $this->load->model('Section', 'section');
+        $data1 = array();
+        $users1 = $this->section->all();
+        $users = $this->section->edit_id($id);
+        $data['all'] = $users;
+        $data['class'] = $users1;
+        $this->form_validation->set_rules('medium', 'Medium', 'required');
+        $this->form_validation->set_rules('class_id', 'Class_id', 'required');
+        $this->form_validation->set_rules('section_name', 'Section_name', 'required');
+        $data1 = array(
+            'medium' => $this->input->post('medium'),
+            'class_id' => $this->input->post('class_id'),
+            'section_name' => $this->input->post('section_name'),
+        );
+        $this->section->update_section($id, $data1);
+        redirect(base_url('Add_section/'));
     }
 
 }
