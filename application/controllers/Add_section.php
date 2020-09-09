@@ -87,6 +87,8 @@ class Add_section extends CI_Controller {
         redirect(base_url('Add_section/'));
     }
 
+    
+
 }
 
 ?>

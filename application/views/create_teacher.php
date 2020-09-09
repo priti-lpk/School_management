@@ -58,59 +58,66 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_teacher/edit_teacher/' . $users['id']) : site_url('Add_teacher/insert_teacher'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_teacher/edit_teacher/' . $users[0]['id']) : site_url('Add_teacher/insert_teacher'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">First Name</label>
                                                     <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="text"  placeholder="First Name" id="t_fname" name="t_fname" value="<?php echo isset($users) ? set_value("t_fname", $users['t_fname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="First Name" id="t_fname" name="t_fname" value="<?php echo isset($users) ? set_value("t_fname", $users[0]['t_fname']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Last Name</label>
                                                     <div class="col-sm-4"style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Last Name" id="t_lastname" name="t_lastname" value="<?php echo isset($users) ? set_value("t_lastname", $users['t_lastname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Last Name" id="t_lastname" name="t_lastname" value="<?php echo isset($users) ? set_value("t_lastname", $users[0]['t_lastname']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Contact</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="text"  placeholder="Contact No." id="t_mobno" name="t_mobno" value="<?php echo isset($users) ? set_value("t_mobno", $users['t_mobno']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Contact No." id="t_mobno" name="t_mobno" value="<?php echo isset($users) ? set_value("t_mobno", $users[0]['t_mobno']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Village</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Village" id="village" name="village" value="<?php echo isset($users) ? set_value("village", $users['village']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Village" id="village" name="village" value="<?php echo isset($users) ? set_value("village", $users[0]['village']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Taluka</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="Taluka" id="taluka" name="taluka" value="<?php echo isset($users) ? set_value("taluka", $users['taluka']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Taluka" id="taluka" name="taluka" value="<?php echo isset($users) ? set_value("taluka", $users[0]['taluka']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">District</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="District" id="district" name="district" value="<?php echo isset($users) ? set_value("district", $users['district']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="District" id="district" name="district" value="<?php echo isset($users) ? set_value("district", $users[0]['district']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">State</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="State" id="state" name="state" value="<?php echo isset($users) ? set_value("state", $users['state']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="State" id="state" name="state" value="<?php echo isset($users) ? set_value("state", $users[0]['state']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Pin Code</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="number"  placeholder="Pin Code" id="pin_code" name="pin_code" value="<?php echo isset($users) ? set_value("pin_code", $users['pin_code']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="number"  placeholder="Pin Code" id="pincode" name="pincode" value="<?php echo isset($users) ? set_value("pincode", $users[0]['pincode']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Address</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">  
-                                                        <input class="form-control" type="text"  placeholder="Address" id="address" name="address" value="<?php echo isset($users) ? set_value("address", $users['address']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Address" id="address" name="address" value="<?php echo isset($users) ? set_value("address", $users[0]['address']) : set_value(""); ?>" required="">
                                                     </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Image</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input type="file" id="t_image" name="t_image" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("t_image", $users['t_image']) : set_value(""); ?>" >
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Religion</label>
+                                                    <div class="col-sm-4" style="margin-left: -80px;">  
+                                                        <input class="form-control" type="text"  placeholder="Religion" id="t_religion" name="t_religion" value="<?php echo isset($users) ? set_value("t_religion", $users[0]['t_religion']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Joining Date</label>
+                                                    <div class="col-sm-4" style="margin-left: -95px;">  
+                                                        <input class="form-control" type="date"  placeholder="Joining Date" id="joining_date" name="joining_date" value="<?php echo isset($users) ? set_value("joining_date", $users[0]['joining_date']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Image</label>
+                                                    <div class="col-sm-4" style="margin-left: -80px;">
+                                                        <input type="file" id="t_image" name="t_image" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("t_image", $users[0]['t_image']) : set_value(""); ?>" >
+                                                    </div>
                                                 </div>
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
@@ -139,50 +146,33 @@
                                                         <th>State</th>
                                                         <th>Pin Code</th>
                                                         <th>Address</th>
+                                                        <th>Religion</th>
+                                                        <th>Joining Date</th>
                                                         <th>Image</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    if (!empty($users1)) {
+                                                    if (!empty($all)) {
                                                         $i = 1;
-                                                        foreach ($users1 as $e) {
-                                                            $iid = $e['id'];
+                                                        foreach ($all as $e) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['emp_name'] ?></td>
-                                                                <td><?php echo $e['emp_contact'] ?></td>
-                                                                <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                              ?>" height="60" width="60"></td>-->
-                                                                <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                             ?></td>-->
-                                                                <td><?php
-                                                                    if ($e['emp_status'] == 'Active') {
-                                                                        echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
-                                                                    } else {
-                                                                        echo "<input type='checkbox' switch='none' data-status='1' id='" . $e['id'] . "'  onclick='approveuser(this.id)'/><label for='" . $e['id'] . "'  data-on-label='On' data-off-label='Off' ></label></td>";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php
-                                                                    foreach ($right as $r) {
-                                                                        if ($r['role_edit'] == 1) {
-                                                                            ?>
-                                                                            <a href="<?php echo base_url() . 'Add_employee/getdata_employee/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                                <?php
-                                                                            }
-                                                                            if ($r['role_delete'] == 1) {
-                                                                                ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                              ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    echo "<button type = 'submit' href = '#addparty' class = 'btn btn-primary waves-effect waves-light' data-toggle = 'modal' data-id = '$iid' data-image = '" . $e['emp_image'] . "' data-url='" . base_url() . "' ><b>View Image</b></button>";
-                                                                    ?>
-                                                                </td>
+                                                                <td><?php echo $e['t_fname'] . " " . $e['t_lastname'] ?></td>
+                                                                <td><?php echo $e['t_mobno'] ?></td>
+                                                                <td><?php echo $e['village'] ?></td>
+                                                                <td><?php echo $e['taluka'] ?></td>
+                                                                <td><?php echo $e['district'] ?></td>
+                                                                <td><?php echo $e['state'] ?></td>
+                                                                <td><?php echo $e['pincode'] ?></td>
+                                                                <td><?php echo $e['address'] ?></td>
+                                                                <td><?php echo $e['t_religion'] ?></td>
+                                                                <td><?php echo $e['joining_date'] ?></td>
+                                                                <td><img src="<?php echo base_url("Teacher/" . $e['t_image']); ?>" height="60" width="60"></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_teacher/getdata_teacher/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_teacher/delete_teacher/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
