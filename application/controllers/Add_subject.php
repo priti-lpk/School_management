@@ -56,6 +56,49 @@ class Add_subject extends CI_Controller {
         redirect(base_url() . 'Add_subject/');
     }
 
+    function getdata_subject($id) {
+        $this->load->model('Subject', 'subject');
+        $users1 = $this->subject->edit_id($id);
+        $users = $this->subject->all();
+        $medium = $this->subject->get_medium();
+        $teacher = $this->subject->get_teacher();
+        $class_id = $this->subject->fetch_class_id($id);
+        $data = array();
+        $data['all'] = $users;
+        $data['medium'] = $medium;
+        $data['users'] = $users1;
+        $data['class'] = $class_id;
+        $data['teacher'] = $teacher;
+        $this->load->view('create_subject', $data);
+    }
+
+    function edit_subject($id) {
+        $this->load->model('Subject', 'subject');
+        $data1 = array();
+        $users = $this->subject->all();
+        $users1 = $this->subject->edit_id($id);
+        $data['all'] = $users;
+        $data['users'] = $users1;
+        $this->form_validation->set_rules('medium', 'medium', 'required');
+        $this->form_validation->set_rules('class_id', 'class_id', 'required');
+        $this->form_validation->set_rules('teacher_id', 'teacher_id', 'required');
+        $this->form_validation->set_rules('subject_name', 'subject_name', 'required');
+        $data1 = array(
+            'medium' => $this->input->post('medium'),
+            'class_id' => $this->input->post('class_id'),
+            'teacher_id' => $this->input->post('teacher_id'),
+            'subject_name' => $this->input->post('subject_name'),
+        );
+        $this->subject->update_subject($id, $data1);
+        redirect(base_url('Add_subject/'));
+    }
+
+    function delete_subject($id) {
+        $this->load->model('Subject', 'subject');
+        $this->subject->delete_subject($id);
+        redirect(base_url('Add_subject'));
+    }
+
 }
 
 ?>

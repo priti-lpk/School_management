@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_subject/edit_subject/' . $users['id']) : site_url('Add_subject/insert_subject'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_subject/edit_subject/' . $users[0]['id']) : site_url('Add_subject/insert_subject'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -113,7 +113,7 @@
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Subject Name</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Subject Name" id="subject_name" name="subject_name" value="<?php echo isset($users) ? set_value("subject_name", $users['subject_name']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Subject Name" id="subject_name" name="subject_name" value="<?php echo isset($users) ? set_value("subject_name", $users[0]['subject_name']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
@@ -155,7 +155,7 @@
                                                                 <td><?php echo $e['t_fname'] . " " . $e['t_lastname'] ?></td>
                                                                 <td><?php echo $e['subject_name'] ?></td>
                                                                 <td><a href="<?php echo base_url() . 'Add_subject/getdata_subject/' . $e['iid'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_subject/delete_ssubject/' . $e['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                    <a href="<?php echo base_url() . 'Add_subject/delete_subject/' . $e['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }

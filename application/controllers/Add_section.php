@@ -87,7 +87,11 @@ class Add_section extends CI_Controller {
         redirect(base_url('Add_section/'));
     }
 
-    
+    function delete_section($id) {
+        $this->load->model('Section', 'section');
+        $this->section->delete_section($id);
+        redirect(base_url('Add_section'));
+    }
 
 }
 
