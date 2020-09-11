@@ -68,12 +68,13 @@ class Assignment extends CI_Model {
     }
 
     public function fetch_subject_id($id) {
-        $query1 = $this->db->query("SELECT medium FROM create_assignment where id=" . $id);
+        $query1 = $this->db->query("SELECT medium,subject_id FROM create_assignment where id=" . $id);
         $s = $query1->result();
-        $query2 = $this->db->query("SELECT id FROM create_class where medium=" . $s[0]->medium);
-        $c = $query2->result();
-        $query = $this->db->query("SELECT * FROM create_subject where class_id=" . $c[0]->id);
+//        $query2 = $this->db->query("SELECT id FROM create_class where medium=" . $s[0]->medium);
+//        $c = $query2->result();
+        $query = $this->db->query("SELECT * FROM create_subject where class_id=" . $s[0]->subject_id);
         return $query->result();
+//        return $this->db->last_query();
     }
 
 }

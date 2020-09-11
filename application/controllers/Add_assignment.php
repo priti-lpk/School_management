@@ -84,7 +84,8 @@ class Add_assignment extends CI_Controller {
         $data['users'] = $users1;
         $data['medium'] = $medium;
         $data['class'] = $class;
-        $data['all_subject'] = $subject;
+        $data['all_sub'] = $subject;
+        print_r($data['all_sub']);
         $this->load->view('create_assignment', $data);
     }
 
