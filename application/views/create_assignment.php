@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_assignment/edit_assignment/' . $users['id']) : site_url('Add_assignment/insert_assignment'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_assignment/edit_assignment/' . $users[0]['id']) : site_url('Add_assignment/insert_assignment'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -97,22 +97,15 @@
                                                         <select class="form-control select2" name="subject_id" id="create_subject">
                                                             <option>Select Subject</option>
                                                             <?php
-                                                            if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="English" >English</option>
-                                                                <option value="Gujarati">Gujarati</option>
-                                                                <?php
+                                                            foreach ($all_sub as $val) {
+                                                                echo "<option " . ($val->id == $users[0]['subject_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->subject_name . "</option>";
                                                             }
                                                             ?>
                                                         </select>
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Deadline</label>
                                                     <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="date"  placeholder="Deadline" id="deadline" name="deadline" value="<?php echo isset($users) ? set_value("deadline", $users['deadline']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="date"  placeholder="Deadline" id="deadline" name="deadline" value="<?php echo isset($users) ? set_value("deadline", $users[0]['deadline']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div><div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">File</label>
@@ -135,57 +128,34 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Section</h4><br>
+                                            <h4 class="mt-0 header-title">View of Assignment</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Medium</th>
                                                         <th>Class Name</th>
-                                                        <th>Section Name</th>
+                                                        <th>Subject Name</th>
+                                                        <th>Deadline</th>
+                                                        <th>File</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    if (!empty($users1)) {
+                                                    if (!empty($all)) {
                                                         $i = 1;
-                                                        foreach ($users1 as $e) {
-                                                            $iid = $e['id'];
+                                                        foreach ($all as $e) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['emp_name'] ?></td>
-                                                                <td><?php echo $e['emp_contact'] ?></td>
-                                                                <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                        ?>" height="60" width="60"></td>-->
-                                                                <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                                       ?></td>-->
-                                                                <td><?php
-                                                                    if ($e['emp_status'] == 'Active') {
-                                                                        echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
-                                                                    } else {
-                                                                        echo "<input type='checkbox' switch='none' data-status='1' id='" . $e['id'] . "'  onclick='approveuser(this.id)'/><label for='" . $e['id'] . "'  data-on-label='On' data-off-label='Off' ></label></td>";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php
-                                                                    foreach ($right as $r) {
-                                                                        if ($r['role_edit'] == 1) {
-                                                                            ?>
-                                                                            <a href="<?php echo base_url() . 'Add_employee/getdata_employee/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                                <?php
-                                                                            }
-                                                                            if ($r['role_delete'] == 1) {
-                                                                                ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                       ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    echo "<button type = 'submit' href = '#addparty' class = 'btn btn-primary waves-effect waves-light' data-toggle = 'modal' data-id = '$iid' data-image = '" . $e['emp_image'] . "' data-url='" . base_url() . "' ><b>View Image</b></button>";
-                                                                    ?>
-                                                                </td>
+                                                                <td><?php echo $e['medium_name'] ?></td>
+                                                                <td><?php echo $e['class_name'] ?></td>
+                                                                <td><?php echo $e['subject_name'] ?></td>
+                                                                <td><?php echo $e['deadline'] ?></td>                                                                
+                                                                <td><a href="<?php echo base_url("Assignment/" . $e['file']); ?>" target="_blank" download><?php echo $e['file'] ?></a></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_assignment/getdata_assignment/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_assignment/delete_assignment/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -261,51 +231,51 @@
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
         <script type="text/javascript">
-                                                            function mainchange() {
+                                                                        function mainchange() {
 
-                                                                var med = document.getElementById("medium").value;
-                                                                var dataString = 'medium=' + med;
-                                                                $.ajax({
-                                                                    url: "<?php echo base_url() . 'Add_assignment/get_class' ?>",
-                                                                    method: "POST",
-                                                                    datatype: "html",
-                                                                    data: dataString,
-                                                                    cache: false,
-                                                                    success: function (data)
-                                                                    {
+                                                                            var med = document.getElementById("medium").value;
+                                                                            var dataString = 'medium=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_assignment/get_class' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+                                                                                    //                                                                        alert(data);
+                                                                                    $("#create_party").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
+                                                                        function subchange() {
+
+                                                                            var med = document.getElementById("create_party").value;
+                                                                            //                                                                alert(med);
+                                                                            var dataString = 'class=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_assignment/get_sub' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
 //                                                                        alert(data);
-                                                                        $("#create_party").html(data);
-                                                                    },
-                                                                    error: function (errorThrown) {
-                                                                        alert(errorThrown);
-                                                                        alert("There is an error with AJAX!");
-                                                                    }
-                                                                });
-                                                            }
-                                                            ;
-                                                            function subchange() {
-
-                                                                var med = document.getElementById("party_id").value;
-                                                                alert(med);
-                                                                var dataString = 'class=' + med;
-                                                                $.ajax({
-                                                                    url: "<?php echo base_url() . 'Add_assignment/get_sub' ?>",
-                                                                    method: "POST",
-                                                                    datatype: "html",
-                                                                    data: dataString,
-                                                                    cache: false,
-                                                                    success: function (data)
-                                                                    {
-                                                                        alert(data);
-                                                                        $("#create_subject").html(data);
-                                                                    },
-                                                                    error: function (errorThrown) {
-                                                                        alert(errorThrown);
-                                                                        alert("There is an error with AJAX!");
-                                                                    }
-                                                                });
-                                                            }
-                                                            ;
+                                                                                    $("#create_subject").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
         </script>
     </body>
 
