@@ -62,18 +62,19 @@
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
-                                                        <select class="form-control select2" name="medium" id="create_party">
+                                                        <select class="form-control select2" name="medium" id="medium" onchange="mainchange();">
                                                             <option>Select Medium</option>
                                                             <?php
-                                                            if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="English" >English</option>
-                                                                <option value="Gujarati">Gujarati</option>
-                                                                <?php
+                                                            foreach ($medium as $p) {
+                                                                if (isset($users)) {
+                                                                    ?>
+                                                                    <option <?php echo ($p->id == $users[0]['medium'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <option value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                }
                                                             }
                                                             ?>
                                                         </select>
@@ -116,36 +117,22 @@
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Select Class</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
-                                                        <select class="form-control select2" name="class_id" id="create_party">
+                                                        <select class="form-control select2" name="class_id" id="create_party" onchange="subchange();">
                                                             <option>Select Class</option>
                                                             <?php
-                                                            if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="English" >English</option>
-                                                                <option value="Gujarati">Gujarati</option>
-                                                                <?php
+                                                            foreach ($class as $val) {
+                                                                echo "<option " . ($val->id == $users[0]['class_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->class_name . "</option>";
                                                             }
                                                             ?>
                                                         </select>
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Section</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
-                                                        <select class="form-control select2" name="section_id" id="create_party">
+                                                        <select class="form-control select2" name="section_id" id="create_subject">
                                                             <option>Select Section</option>
                                                             <?php
-                                                            if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="English" >English</option>
-                                                                <option value="Gujarati">Gujarati</option>
-                                                                <?php
+                                                            foreach ($all_sub as $val) {
+                                                                echo "<option " . ($val->id == $users[0]['section_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->section_name . "</option>";
                                                             }
                                                             ?>
                                                         </select>
@@ -205,52 +192,33 @@
                                                         <th>Full Name</th>
                                                         <th>Address</th>
                                                         <th>Birth Date</th>
-                                                        <th>Cast</th>
-                                                        <th>Standard</th>
+                                                        <th>Religion</th>
+                                                        <th>Class</th>
+                                                        <th>Section</th>
+                                                        <th>Blood Group</th>
                                                         <th>Photo</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    if (!empty($users1)) {
+                                                    if (!empty($all)) {
                                                         $i = 1;
-                                                        foreach ($users1 as $e) {
-                                                            $iid = $e['id'];
+                                                        foreach ($all as $e) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['emp_name'] ?></td>
-                                                                <td><?php echo $e['emp_contact'] ?></td>
-                                                                <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                                         ?>" height="60" width="60"></td>-->
-                                                                <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                                        ?></td>-->
-                                                                <td><?php
-                                                                    if ($e['emp_status'] == 'Active') {
-                                                                        echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
-                                                                    } else {
-                                                                        echo "<input type='checkbox' switch='none' data-status='1' id='" . $e['id'] . "'  onclick='approveuser(this.id)'/><label for='" . $e['id'] . "'  data-on-label='On' data-off-label='Off' ></label></td>";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php
-                                                                    foreach ($right as $r) {
-                                                                        if ($r['role_edit'] == 1) {
-                                                                            ?>
-                                                                            <a href="<?php echo base_url() . 'Add_employee/getdata_employee/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                                <?php
-                                                                            }
-                                                                            if ($r['role_delete'] == 1) {
-                                                                                ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                                        ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    echo "<button type = 'submit' href = '#addparty' class = 'btn btn-primary waves-effect waves-light' data-toggle = 'modal' data-id = '$iid' data-image = '" . $e['emp_image'] . "' data-url='" . base_url() . "' ><b>View Image</b></button>";
-                                                                    ?>
-                                                                </td>
+                                                                <td><?php echo $e['medium_name'] ?></td>
+                                                                <td><?php echo $e['s_grno'] ?></td>
+                                                                <td><?php echo $e['s_surname']." ".$e['s_name']." ".$e['s_fathername'] ?></td>
+                                                                <td><?php echo $e['s_address'] ?></td>
+                                                                <td><?php echo $e['s_dob'] ?></td>
+                                                                <td><?php echo $e['s_religion'] ?></td>
+                                                                <td><?php echo $e['class_name'] ?></td>
+                                                                <td><?php echo $e['section_name'] ?></td>
+                                                                <td><?php echo $e['blood_group'] ?></td>
+                                                                <td><img src="<?php echo base_url("Student/".$e['s_image']); ?>" height="60" width="60"></td>
+                                                                <td></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -325,7 +293,53 @@
         <script src="<?php echo base_url() . 'assets/pages/form-advanced.js' ?>"></script>
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
+        <script type="text/javascript">
+                                                            function mainchange() {
 
+                                                                var med = document.getElementById("medium").value;
+                                                                var dataString = 'medium=' + med;
+                                                                $.ajax({
+                                                                    url: "<?php echo base_url() . 'Add_student/get_class' ?>",
+                                                                    method: "POST",
+                                                                    datatype: "html",
+                                                                    data: dataString,
+                                                                    cache: false,
+                                                                    success: function (data)
+                                                                    {
+                                                                        //                                                                        alert(data);
+                                                                        $("#create_party").html(data);
+                                                                    },
+                                                                    error: function (errorThrown) {
+                                                                        alert(errorThrown);
+                                                                        alert("There is an error with AJAX!");
+                                                                    }
+                                                                });
+                                                            }
+                                                            ;
+                                                            function subchange() {
+
+                                                                var med = document.getElementById("create_party").value;
+                                                                //                                                                alert(med);
+                                                                var dataString = 'class=' + med;
+                                                                $.ajax({
+                                                                    url: "<?php echo base_url() . 'Add_student/get_sub' ?>",
+                                                                    method: "POST",
+                                                                    datatype: "html",
+                                                                    data: dataString,
+                                                                    cache: false,
+                                                                    success: function (data)
+                                                                    {
+                                                                        //                                                                        alert(data);
+                                                                        $("#create_subject").html(data);
+                                                                    },
+                                                                    error: function (errorThrown) {
+                                                                        alert(errorThrown);
+                                                                        alert("There is an error with AJAX!");
+                                                                    }
+                                                                });
+                                                            }
+                                                            ;
+        </script>
     </body>
 
 </html>
