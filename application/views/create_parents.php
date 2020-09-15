@@ -58,71 +58,71 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_parents/edit_parents/' . $users['id']) : site_url('Add_parents/insert_parents'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_parents/edit_parents/' . $users[0]['id']) : site_url('Add_parents/insert_parents'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">First Name</label>
                                                     <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="text"  placeholder="First Name" id="p_fname" name="p_fname" value="<?php echo isset($users) ? set_value("p_fname", $users['p_fname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="First Name" id="p_fname" name="p_fname" value="<?php echo isset($users) ? set_value("p_fname", $users[0]['p_fname']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Middle Name</label>
                                                     <div class="col-sm-4"style="margin-left: -80px;">
-                                                        <input class="form-control" type="text"  placeholder="Middle Name" id="p_mname" name="p_mname" value="<?php echo isset($users) ? set_value("p_mname", $users['p_mname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Middle Name" id="p_mname" name="p_mname" value="<?php echo isset($users) ? set_value("p_mname", $users[0]['p_mname']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Surname</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="text"  placeholder="Surname" id="p_surname" name="p_surname" value="<?php echo isset($users) ? set_value("p_surname", $users['p_surname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Surname" id="p_surname" name="p_surname" value="<?php echo isset($users) ? set_value("p_surname", $users[0]['p_surname']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Mother's Name</label>
                                                     <div class="col-sm-4" style="margin-left: -75px;">  
-                                                        <input class="form-control" type="text"  placeholder="Mother's Name" id="s_mothername" name="s_mothername" value="<?php echo isset($users) ? set_value("s_mothername", $users['s_mothername']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Mother's Name" id="s_mothername" name="s_mothername" value="<?php echo isset($users) ? set_value("s_mothername", $users[0]['s_mothername']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Mobile No.1</label>
                                                     <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="number"  placeholder="Mobile No.1" id="p_mobno1" name="p_mobno1" value="<?php echo isset($users) ? set_value("p_mobno1", $users['p_mobno1']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="number"  placeholder="Mobile No.1" id="p_mobno1" name="p_mobno1" value="<?php echo isset($users) ? set_value("p_mobno1", $users[0]['p_mobno1']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Mobile No.2</label>
                                                     <div class="col-sm-4" style="margin-left: -75px;">  
-                                                        <input class="form-control" type="number"  placeholder="Mobile No.2" id="p_mobno2" name="p_mobno2" value="<?php echo isset($users) ? set_value("p_mobno2", $users['p_mobno2']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="number"  placeholder="Mobile No.2" id="p_mobno2" name="p_mobno2" value="<?php echo isset($users) ? set_value("p_mobno2", $users[0]['p_mobno2']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Village</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="text"  placeholder="Village" id="village" name="village" value="<?php echo isset($users) ? set_value("village", $users['village']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Village" id="village" name="village" value="<?php echo isset($users) ? set_value("village", $users[0]['village']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Taluka</label>
                                                     <div class="col-sm-4" style="margin-left: -70px;">  
-                                                        <input class="form-control" type="text"  placeholder="Taluka" id="taluka" name="taluka" value="<?php echo isset($users) ? set_value("taluka", $users['taluka']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Taluka" id="taluka" name="taluka" value="<?php echo isset($users) ? set_value("taluka", $users[0]['taluka']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">District</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="text"  placeholder="District" id="district" name="district" value="<?php echo isset($users) ? set_value("district", $users['district']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="District" id="district" name="district" value="<?php echo isset($users) ? set_value("district", $users[0]['district']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">State</label>
                                                     <div class="col-sm-4" style="margin-left: -70px;">  
-                                                        <input class="form-control" type="text"  placeholder="State" id="state" name="state" value="<?php echo isset($users) ? set_value("state", $users['state']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="State" id="state" name="state" value="<?php echo isset($users) ? set_value("state", $users[0]['state']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Pin Code</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input class="form-control" type="number"  placeholder="Pin Code" id="pin_code" name="pin_code" value="<?php echo isset($users) ? set_value("pin_code", $users['pin_code']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="number"  placeholder="Pin Code" id="pin_code" name="pin_code" value="<?php echo isset($users) ? set_value("pin_code", $users[0]['pin_code']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Address</label>
                                                     <div class="col-sm-4" style="margin-left: -70px;">  
-                                                        <input class="form-control" type="text"  placeholder="Address" id="address" name="address" value="<?php echo isset($users) ? set_value("address", $users['address']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Address" id="address" name="address" value="<?php echo isset($users) ? set_value("address", $users[0]['address']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Proof</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
-                                                        <input type="file" id="proof" name="proof" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("proof", $users['proof']) : set_value(""); ?>" >
+                                                        <input type="file" id="proof" name="proof" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("proof", $users[0]['proof']) : set_value(""); ?>" >
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
@@ -159,44 +159,24 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    if (!empty($users1)) {
+                                                    if (!empty($all)) {
                                                         $i = 1;
-                                                        foreach ($users1 as $e) {
-                                                            $iid = $e['id'];
+                                                        foreach ($all as $e) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['emp_name'] ?></td>
-                                                                <td><?php echo $e['emp_contact'] ?></td>
-                                                                <td><?php echo $e['emp_address'] ?></td>
-                                                                <!--<td><img src="<?php // echo base_url($e['emp_image']);                           ?>" height="60" width="60"></td>-->
-                                                                <td><?php echo $e['emp_designation'] ?></td>
-                                                                <!--<td><?php // echo $e['emp_type']                          ?></td>-->
-                                                                <td><?php
-                                                                    if ($e['emp_status'] == 'Active') {
-                                                                        echo "<input type='checkbox' switch='none' data-status='0' id='" . $e['id'] . "'   onclick='approveuser(this.id)' checked/><label for='" . $e['id'] . "' data-on-label='On' data-off-label='Off'></label></td>";
-                                                                    } else {
-                                                                        echo "<input type='checkbox' switch='none' data-status='1' id='" . $e['id'] . "'  onclick='approveuser(this.id)'/><label for='" . $e['id'] . "'  data-on-label='On' data-off-label='Off' ></label></td>";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php
-                                                                    foreach ($right as $r) {
-                                                                        if ($r['role_edit'] == 1) {
-                                                                            ?>
-                                                                            <a href="<?php echo base_url() . 'Add_employee/getdata_employee/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                                <?php
-                                                                            }
-                                                                            if ($r['role_delete'] == 1) {
-                                                                                ?>
-                                                                            <!--<a href="<?php // echo base_url() . 'index.php/login/delete_employee/' . $e['id']                           ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    echo "<button type = 'submit' href = '#addparty' class = 'btn btn-primary waves-effect waves-light' data-toggle = 'modal' data-id = '$iid' data-image = '" . $e['emp_image'] . "' data-url='" . base_url() . "' ><b>View Image</b></button>";
-                                                                    ?>
-                                                                </td>
+                                                                <td><?php echo $e['p_fname'] . " " . $e['p_mname'] . " " . $e['p_surname'] ?></td>
+                                                                <td><?php echo $e['s_mothername'] ?></td>
+                                                                <td><?php echo $e['p_mobno1'] . " / " . $e['p_mobno2'] ?></td>
+                                                                <td><?php echo $e['village'] ?></td>
+                                                                <td><?php echo $e['taluka'] ?></td>
+                                                                <td><?php echo $e['district'] ?></td>
+                                                                <td><?php echo $e['state'] ?></td>
+                                                                <td><?php echo $e['pin_code'] ?></td>
+                                                                <td><?php echo $e['address'] ?></td>
+                                                                <td><img src="<?php echo base_url("Parents/" . $e['proof']); ?>" height="60" width="60"></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_parents/getdata_parents/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_parents/delete_parents/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }

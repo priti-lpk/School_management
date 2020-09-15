@@ -41,9 +41,9 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Exam <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Exam Name</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Exam Schedule</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Exam Attendance</a></li>
+                        <li><a href="<?php echo base_url('Add_exam') ?>">Exam Name</a></li>
+                        <li><a href="<?php echo base_url('Add_exam_schedule') ?>">Exam Schedule</a></li>
+                        <li><a href="<?php echo base_url('Add_exam_attendance') ?>">Exam Attendance</a></li>
                         <li><a href="<?php echo base_url('Add_sub_category') ?>">Grade Details</a></li>
                     </ul>
                 </li>
@@ -70,9 +70,9 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Online Exam <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Question Level</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Questions</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Instruction</a></li>
+                        <li><a href="<?php echo base_url('Add_question_level') ?>">Question Level</a></li>
+                        <li><a href="<?php echo base_url('Add_question') ?>">Questions</a></li>
+                        <li><a href="<?php echo base_url('Add_instruction') ?>">Instruction</a></li>
                         <li><a href="<?php echo base_url('Add_sub_category') ?>">Take Exam</a></li>
                     </ul>
                 </li>

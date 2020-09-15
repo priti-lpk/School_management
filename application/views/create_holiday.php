@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Academic Year</title>
+        <title>Holiday</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Academic Year</h4>
+                                    <h4 class="page-title">Create Holiday</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,21 +58,27 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_academic/edit_academic_year/' . $users[0]['id']) : site_url('Add_academic/insert_academic_year'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_holiday/edit_holiday/' . $users[0]['id']) : site_url('Add_holiday/insert_holiday'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Year</label>
-                                                    <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="text"  placeholder="Year" id="year" name="year" value="<?php echo isset($users) ? set_value("year", $users[0]['year']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Starting Date</label>
-                                                    <div class="col-sm-4"style="margin-left: -80px;">
-                                                        <input class="form-control" type="date"  placeholder="Starting Date" id="starting_date" name="starting_date" value="<?php echo isset($users) ? set_value("starting_date", $users[0]['starting_date']) : set_value(""); ?>" required="">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Title</label>
+                                                    <div class="col-sm-9" style="margin-left: -95px;">
+                                                        <input class="form-control" type="text"  placeholder="Title" id="title" name="title" value="<?php echo isset($users) ? set_value("title", $users[0]['title']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Ending Date</label>
-                                                    <div class="col-sm-4" style="margin-left: -95px;">
-                                                        <input class="form-control" type="date"  placeholder="Ending Date" id="ending_date" name="ending_date" value="<?php echo isset($users) ? set_value("ending_date", $users[0]['ending_date']) : set_value(""); ?>" required="">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">From Date</label>
+                                                    <div class="col-sm-4"style="margin-left: -95px;">
+                                                        <input class="form-control" type="date"  placeholder="From Date" id="from_date" name="from_date" value="<?php echo isset($users) ? set_value("from_date", $users[0]['from_date']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">To Date</label>
+                                                    <div class="col-sm-4"style="margin-left: -95px;">
+                                                        <input class="form-control" type="date"  placeholder="To Date" id="to_date" name="to_date" value="<?php echo isset($users) ? set_value("to_date", $users[0]['to_date']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Details</label>
+                                                    <div class="col-sm-10" style="margin-left: -95px;">
+                                                        <textarea id="elm1" name="details"><?php echo (isset($users) ? $users[0]['details'] : ''); ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
@@ -89,14 +95,15 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Academic Year</h4><br>
+                                            <h4 class="mt-0 header-title">View of Holiday</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Year</th>
-                                                        <th>Starting Date</th>
-                                                        <th>Ending Date</th>
+                                                        <th>Title</th>
+                                                        <th>From Date</th>
+                                                        <th>To Date</th>
+                                                        <th>Details</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
@@ -108,11 +115,12 @@
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['year'] ?></td>
-                                                                <td><?php echo $e['starting_date'] ?></td>
-                                                                <td><?php echo $e['ending_date'] ?></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_academic/getdata_academic_year/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_academic/delete_academic_year/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><?php echo $e['title'] ?></td>
+                                                                <td><?php echo $e['from_date'] ?></td>
+                                                                <td><?php echo $e['to_date'] ?></td>
+                                                                <td><?php echo $e['details'] ?></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_holiday/getdata_holiday/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_holiday/delete_holiday/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -182,12 +190,41 @@
         <script src="<?php echo base_url() . 'plugins/datatables/dataTables.responsive.min.js' ?>"></script>
         <script src="<?php echo base_url() . 'plugins/datatables/responsive.bootstrap4.min.js' ?>"></script>
         <script src="<?php echo base_url() . 'assets/pages/datatables.init.js' ?>"></script>
-
+        <!-- Sweet-Alert  -->
+        <script src="<?php echo base_url() . 'plugins/sweet-alert2/sweetalert2.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/pages/sweet-alert.init.js' ?>"></script>
         <!-- Plugins Init js -->
         <script src="<?php echo base_url() . 'assets/pages/form-advanced.js' ?>"></script>
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/tinymce/tinymce.min.js' ?>"></script>
 
+        <script type="text/javascript">
+                                                                $(document).ready(function () {
+                                                                    if ($("#elm1").length > 0) {
+                                                                        tinymce.init({
+                                                                            selector: "textarea#elm1",
+                                                                            theme: "modern",
+                                                                            height: 300,
+                                                                            plugins: [
+                                                                                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                                                                                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                                                                                "save table contextmenu directionality emoticons template paste textcolor"
+                                                                            ],
+                                                                            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+                                                                            style_formats: [
+                                                                                {title: 'Bold text', inline: 'b'},
+                                                                                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                                                                                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                                                                                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                                                                                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                                                                                {title: 'Table styles'},
+                                                                                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+                                                                            ]
+                                                                        });
+                                                                    }
+                                                                });
+        </script>
     </body>
 
 </html>

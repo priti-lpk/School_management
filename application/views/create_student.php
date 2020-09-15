@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_student/edit_student/' . $users['id']) : site_url('Add_student/insert_student'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_student/edit_student/' . $users[0]['id']) : site_url('Add_student/insert_student'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
@@ -81,37 +81,37 @@
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">G.R. No.</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="G.R.No." id="s_grno" name="s_grno" value="<?php echo isset($users) ? set_value("s_grno", $users['s_grno']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="G.R.No." id="s_grno" name="s_grno" value="<?php echo isset($users) ? set_value("s_grno", $users[0]['s_grno']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Surname</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Surname" id="s_surname" name="s_surname" value="<?php echo isset($users) ? set_value("s_surname", $users['s_surname']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Surname" id="s_surname" name="s_surname" value="<?php echo isset($users) ? set_value("s_surname", $users[0]['s_surname']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Name</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Name" id="s_name" name="s_name" value="<?php echo isset($users) ? set_value("s_name", $users['s_name']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Name" id="s_name" name="s_name" value="<?php echo isset($users) ? set_value("s_name", $users[0]['s_name']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Father Name</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Father Name" id="s_fathername" name="s_fathername" value="<?php echo isset($users) ? set_value("s_fathername", $users['s_fathername']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Father Name" id="s_fathername" name="s_fathername" value="<?php echo isset($users) ? set_value("s_fathername", $users[0]['s_fathername']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Address</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Address" id="s_address" name="s_address" value="<?php echo isset($users) ? set_value("s_address", $users['s_address']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Address" id="s_address" name="s_address" value="<?php echo isset($users) ? set_value("s_address", $users[0]['s_address']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Birth Date</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="date"  placeholder="Birth Date" id="s_dob" name="s_dob" value="<?php echo isset($users) ? set_value("s_dob", $users['s_dob']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="date"  placeholder="Birth Date" id="s_dob" name="s_dob" value="<?php echo isset($users) ? set_value("s_dob", $users[0]['s_dob']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Religion</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control" type="text"  placeholder="Religion" id="s_religion" name="s_religion" value="<?php echo isset($users) ? set_value("s_religion", $users['s_religion']) : set_value(""); ?>" required="">
+                                                        <input class="form-control" type="text"  placeholder="Religion" id="s_religion" name="s_religion" value="<?php echo isset($users) ? set_value("s_religion", $users[0]['s_religion']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -143,29 +143,51 @@
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
                                                         <select class="form-control select2" name="blood_group" id="create_party">
                                                             <option>Select Blood Group</option>
-                                                            <?php
+                                                            <option <?php
                                                             if (isset($users)) {
-                                                                ?>
-                                                                <option <?php echo ('English' == $users[0]['party_id'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" disabled=""><?php echo $p->party_name; ?></option>
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <option value="A+">A+</option>
-                                                                <option value="A-">A-</option>
-                                                                <option value="B+">B+</option>
-                                                                <option value="B-">B-</option>
-                                                                <option value="O+">O+</option>
-                                                                <option value="O-">O-</option>
-                                                                <option value="AB+">AB+</option>
-                                                                <option value="AB-">AB-</option>
-                                                                <?php
+                                                                echo $users[0]['blood_group'] == 'A+' ? ' selected="selected"' : '';
                                                             }
-                                                            ?>
+                                                            ?> value="A+">A+</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'A-' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="A-">A-</option>
+                                                            <option  <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'B+' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="B+">B+</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'B-' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="B-">B-</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'O+' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="O+">O+</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'O-' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="O-">O-</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'AB+' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="AB+">AB+</option>
+                                                            <option <?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['blood_group'] == 'AB-' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="AB-">AB-</option>
                                                         </select>
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Image</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" type="file"  placeholder="Image" id="s_image" name="s_image" value="<?php echo isset($users) ? set_value("s_image", $users['s_image']) : set_value(""); ?>" required="">
+                                                        <input class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" type="file"  placeholder="Image" id="s_image" name="s_image" value="<?php echo isset($users) ? set_value("s_image", $users[0]['s_image']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
@@ -210,15 +232,16 @@
                                                                 <td><?php echo $e['id']; ?></td>
                                                                 <td><?php echo $e['medium_name'] ?></td>
                                                                 <td><?php echo $e['s_grno'] ?></td>
-                                                                <td><?php echo $e['s_surname']." ".$e['s_name']." ".$e['s_fathername'] ?></td>
+                                                                <td><?php echo $e['s_surname'] . " " . $e['s_name'] . " " . $e['s_fathername'] ?></td>
                                                                 <td><?php echo $e['s_address'] ?></td>
                                                                 <td><?php echo $e['s_dob'] ?></td>
                                                                 <td><?php echo $e['s_religion'] ?></td>
                                                                 <td><?php echo $e['class_name'] ?></td>
                                                                 <td><?php echo $e['section_name'] ?></td>
                                                                 <td><?php echo $e['blood_group'] ?></td>
-                                                                <td><img src="<?php echo base_url("Student/".$e['s_image']); ?>" height="60" width="60"></td>
-                                                                <td></td>
+                                                                <td><img src="<?php echo base_url("Student/" . $e['s_image']); ?>" height="60" width="60"></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_student/getdata_student/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_student/delete_student/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -294,51 +317,51 @@
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
         <script type="text/javascript">
-                                                            function mainchange() {
+                                                                        function mainchange() {
 
-                                                                var med = document.getElementById("medium").value;
-                                                                var dataString = 'medium=' + med;
-                                                                $.ajax({
-                                                                    url: "<?php echo base_url() . 'Add_student/get_class' ?>",
-                                                                    method: "POST",
-                                                                    datatype: "html",
-                                                                    data: dataString,
-                                                                    cache: false,
-                                                                    success: function (data)
-                                                                    {
-                                                                        //                                                                        alert(data);
-                                                                        $("#create_party").html(data);
-                                                                    },
-                                                                    error: function (errorThrown) {
-                                                                        alert(errorThrown);
-                                                                        alert("There is an error with AJAX!");
-                                                                    }
-                                                                });
-                                                            }
-                                                            ;
-                                                            function subchange() {
+                                                                            var med = document.getElementById("medium").value;
+                                                                            var dataString = 'medium=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_student/get_class' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+                                                                                    //                                                                        alert(data);
+                                                                                    $("#create_party").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
+                                                                        function subchange() {
 
-                                                                var med = document.getElementById("create_party").value;
-                                                                //                                                                alert(med);
-                                                                var dataString = 'class=' + med;
-                                                                $.ajax({
-                                                                    url: "<?php echo base_url() . 'Add_student/get_sub' ?>",
-                                                                    method: "POST",
-                                                                    datatype: "html",
-                                                                    data: dataString,
-                                                                    cache: false,
-                                                                    success: function (data)
-                                                                    {
-                                                                        //                                                                        alert(data);
-                                                                        $("#create_subject").html(data);
-                                                                    },
-                                                                    error: function (errorThrown) {
-                                                                        alert(errorThrown);
-                                                                        alert("There is an error with AJAX!");
-                                                                    }
-                                                                });
-                                                            }
-                                                            ;
+                                                                            var med = document.getElementById("create_party").value;
+                                                                            //                                                                alert(med);
+                                                                            var dataString = 'class=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_student/get_sub' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+                                                                                    //                                                                        alert(data);
+                                                                                    $("#create_subject").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
         </script>
     </body>
 

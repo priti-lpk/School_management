@@ -92,14 +92,14 @@ class Add_student extends CI_Controller {
         $users = $this->student->all();
         $medium = $this->student->get_medium();
         $class = $this->student->fetch_class_id($id);
-        $subject = $this->student->fetch_subject_id($id);
+        $subject = $this->student->fetch_section_id($id);
         $data = array();
         $data['all'] = $users;
         $data['users'] = $users1;
         $data['medium'] = $medium;
         $data['class'] = $class;
         $data['all_sub'] = $subject;
-        print_r($data['all_sub']);
+//        print_r($data['all_sub']);
         $this->load->view('create_student', $data);
     }
 
