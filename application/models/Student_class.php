@@ -18,7 +18,7 @@ class Student_class extends CI_Model {
     }
 
     public function edit_id($id) {
-        $query = $this->db->query("SELECT id,medium,class_name from create_class where id=" . $id);
+        $query = $this->db->query("SELECT * from create_class where id=" . $id);
         $users = $query->result_array();
         return $users;
     }

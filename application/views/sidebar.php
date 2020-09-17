@@ -44,7 +44,7 @@
                         <li><a href="<?php echo base_url('Add_exam') ?>">Exam Name</a></li>
                         <li><a href="<?php echo base_url('Add_exam_schedule') ?>">Exam Schedule</a></li>
                         <li><a href="<?php echo base_url('Add_exam_attendance') ?>">Exam Attendance</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Grade Details</a></li>
+                        <li><a href="<?php echo base_url('Add_grade') ?>">Grade Details</a></li>
                     </ul>
                 </li>
                 <li>
@@ -72,14 +72,14 @@
                     <ul class="submenu">
                         <li><a href="<?php echo base_url('Add_question_level') ?>">Question Level</a></li>
                         <li><a href="<?php echo base_url('Add_question') ?>">Questions</a></li>
-                        <li><a href="<?php echo base_url('Add_instruction') ?>">Instruction</a></li>
+                        <li><a href="<?php echo base_url('Add_exam_instruction') ?>">Instruction</a></li>
                         <li><a href="<?php echo base_url('Add_sub_category') ?>">Take Exam</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-view-grid"></i><span> Reports <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('View_user') ?>">Class Report</a></li>
+                        <li><a href="<?php echo base_url('View_class_report') ?>">Class Report</a></li>
                         <li><a href="<?php echo base_url('View_quiz_schedule') ?>">Student Report</a></li>
                         <li><a href="<?php echo base_url('View_category_question') ?>">Attendance Report</a></li>
                         <li><a href="<?php echo base_url('View_result') ?>">Online Exam Report</a></li>

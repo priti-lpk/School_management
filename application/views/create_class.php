@@ -84,6 +84,7 @@
                                                         <input class="form-control" type="text"  placeholder="Class Name" id="class_name" name="class_name" value="<?php echo isset($users) ? set_value("class_name", $users[0]['class_name']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
+                                                
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>

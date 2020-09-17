@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Section</title>
+        <title>Question</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Create Section</h4>
+                                    <h4 class="page-title">Create Question</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_section/edit_section/' . $users[0]['id']) : site_url('Add_section/insert_section'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Add_question/edit_question/' . $users[0]['id']) : site_url('Add_question/insert_question'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -91,36 +91,90 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class = "form-group row">
-                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Section Name</label>
-                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
-                                                        <input class = "form-control" type = "text" placeholder = "Section Name" id = "section_name" name = "section_name" value = "<?php echo isset($users) ? set_value("section_name", $users[0]['section_name']) : set_value(""); ?>" required = "">
-                                                    </div>
-                                                </div>
                                                 <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Class Teacher</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <select class="form-control select2" name="teacher_id" id="teacher">
-                                                            <option>Select Teacher</option>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Level</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
+                                                        <select class="form-control select2" name="level_id" id="level">
+                                                            <option>Select Level</option>
                                                             <?php
-                                                            foreach ($teacher as $t) {
+                                                            foreach ($level as $l) {
                                                                 if (isset($users)) {
                                                                     ?>
-                                                                    <option <?php echo ($t->id == $users[0]['teacher_id'] ? 'selected' : '') ?> value="<?php echo $t->id; ?>" ><?php echo $t->t_fname . " " . $t->t_lastname; ?></option>
+                                                                    <option <?php echo ($l->id == $users[0]['level_id'] ? 'selected' : '') ?> value="<?php echo $l->id; ?>" ><?php echo $l->type; ?></option>
                                                                     <?php
                                                                 } else {
                                                                     ?>
-                                                                    <option value="<?php echo $t->id; ?>" ><?php echo $t->t_fname . " " . $t->t_lastname; ?></option>
+                                                                    <option value="<?php echo $l->id; ?>" ><?php echo $l->type; ?></option>
                                                                     <?php
                                                                 }
                                                             }
                                                             ?>
-                                                        </select>                                                    
+                                                        </select>
+                                                    </div>
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Image</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input type = "file" id = "image" name = "image" class = "form-control filestyle" data-input = "false" data-buttonname = "btn-secondary">
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Question</label>
+                                                    <div class = "col-sm-9" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Question" id = "question" name = "question" value = "<?php echo isset($users) ? set_value("question", $users[0]['question']) : set_value(""); ?>" required = "">
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Option A</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Option A" id = "option_a" name = "option_a" value = "<?php echo isset($users) ? set_value("option_a", $users[0]['option_a']) : set_value(""); ?>" required = "">
+                                                    </div>
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Option B</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Option B" id = "option_b" name = "option_b" value = "<?php echo isset($users) ? set_value("option_b", $users[0]['option_b']) : set_value(""); ?>" required = "">
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Option C</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Option C" id = "option_c" name = "option_c" value = "<?php echo isset($users) ? set_value("option_c", $users[0]['option_c']) : set_value(""); ?>" required = "">
+                                                    </div>
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Option D</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Option D" id = "option_d" name = "option_d" value = "<?php echo isset($users) ? set_value("option_d", $users[0]['option_d']) : set_value(""); ?>" required = "">
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Answer</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <select class="form-control select2" name="answer" id="answer" required="">
+                                                            <option<?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['answer'] == 'Option A' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value = 'Option A'>Option A</option>
+                                                            <option<?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['answer'] == 'Option B' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value = 'Option B'>Option B</option>
+                                                            <option<?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['answer'] == 'Option C' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value = 'Option C'>Option C</option>
+                                                            <option<?php
+                                                            if (isset($users)) {
+                                                                echo $users[0]['answer'] == 'Option D' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value = 'Option D'>Option D</option>
+                                                        </select> 
+                                                    </div>
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Mark</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Question's Mark" id = "mark" name = "mark" value = "<?php echo isset($users) ? set_value("mark", $users[0]['mark']) : set_value(""); ?>" required = "">
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
-                                                    <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save')
-                                                            ?></button>
+                                                    <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>
                                             </form>
                                         </div>
@@ -133,15 +187,22 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Section</h4><br>
+                                            <h4 class="mt-0 header-title">View of Question</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Medium</th>
                                                         <th>Class Name</th>
-                                                        <th>Section Name</th>
-                                                        <th>Teacher Name</th>
+                                                        <th>Level Type</th>
+                                                        <th>Question</th>
+                                                        <th>Option A</th>
+                                                        <th>Option B</th>
+                                                        <th>Option C</th>
+                                                        <th>Option D</th>
+                                                        <th>Answer</th>
+                                                        <th>Image</th>
+                                                        <th>Question's Mark</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
@@ -155,10 +216,17 @@
                                                                 <td><?php echo $a['id']; ?></td>
                                                                 <td><?php echo $a['medium_name'] ?></td>
                                                                 <td><?php echo $a['class_name'] ?></td>
-                                                                <td><?php echo $a['section_name'] ?></td>
-                                                                <td><?php echo $a['t_fname'] . " " . $a['t_lastname'] ?></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_section/getdata_section/' . $a['iid'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_section/delete_section/' . $a['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><?php echo $a['type'] ?></td>
+                                                                <td><?php echo $a['question'] ?></td>
+                                                                <td><?php echo $a['option_a'] ?></td>
+                                                                <td><?php echo $a['option_b'] ?></td>
+                                                                <td><?php echo $a['option_c'] ?></td>
+                                                                <td><?php echo $a['option_d'] ?></td>
+                                                                <td><?php echo $a['answer'] ?></td>
+                                                                <td><img src="<?php echo base_url("Question/" . $a['image']); ?>" height="60" width="60"></td>
+                                                                <td><?php echo $a['mark'] ?></td>
+                                                                <td><a href="<?php echo base_url() . 'Add_question/getdata_question/' . $a['iid'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Add_question/delete_question/' . $a['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -234,28 +302,28 @@
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
         <script type="text/javascript">
-                                                                        function mainchange() {
+                                                                function mainchange() {
 
-                                                                            var med = document.getElementById("medium").value;
-                                                                            var dataString = 'medium=' + med;
-                                                                            $.ajax({
-                                                                                url: "<?php echo base_url() . 'Add_section/get_class' ?>",
-                                                                                method: "POST",
-                                                                                datatype: "html",
-                                                                                data: dataString,
-                                                                                cache: false,
-                                                                                success: function (data)
-                                                                                {
+                                                                    var med = document.getElementById("medium").value;
+                                                                    var dataString = 'medium=' + med;
+                                                                    $.ajax({
+                                                                        url: "<?php echo base_url() . 'Add_question/get_class' ?>",
+                                                                        method: "POST",
+                                                                        datatype: "html",
+                                                                        data: dataString,
+                                                                        cache: false,
+                                                                        success: function (data)
+                                                                        {
 //                        alert(data);
-                                                                                    $("#create_party").html(data);
-                                                                                },
-                                                                                error: function (errorThrown) {
-                                                                                    alert(errorThrown);
-                                                                                    alert("There is an error with AJAX!");
-                                                                                }
-                                                                            });
+                                                                            $("#create_party").html(data);
+                                                                        },
+                                                                        error: function (errorThrown) {
+                                                                            alert(errorThrown);
+                                                                            alert("There is an error with AJAX!");
                                                                         }
-                                                                        ;
+                                                                    });
+                                                                }
+                                                                ;
         </script>
     </body>
 

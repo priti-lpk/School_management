@@ -17,10 +17,12 @@ class Add_section extends CI_Controller {
         $users = $this->section->all();
         $medium = $this->section->get_medium();
         $class = $this->section->get_class();
+        $teacher = $this->section->get_teacher();
         $data = array();
         $data['all'] = $users;
         $data['medium'] = $medium;
         $data['class'] = $class;
+        $data['teacher'] = $teacher;
         $this->load->view('create_section', $data);
     }
 
@@ -57,14 +59,15 @@ class Add_section extends CI_Controller {
         $users1 = $this->section->edit_id($id);
         $users = $this->section->all();
         $medium = $this->section->get_medium();
-//        $class = $this->section->get_class();
+        $teacher = $this->section->get_teacher();
         $class_id = $this->section->fetch_class_id($id);
         $data = array();
         $data['all'] = $users;
-//        $data['class'] = $class;
+        $data['teacher'] = $teacher;
         $data['medium'] = $medium;
         $data['users'] = $users1;
         $data['class'] = $class_id;
+        print_r($data['class']);
         $this->load->view('create_section', $data);
     }
 
