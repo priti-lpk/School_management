@@ -67,16 +67,25 @@ class Student extends CI_Model {
         return $query->result();
     }
 
+//    public function fetch_section_id($id) {
+//        $query1 = $this->db->query("SELECT medium,class_id FROM create_section where id=" . $id);
+//        $s = $query1->result();
+////        $query2 = $this->db->query("SELECT id FROM create_class where medium=" . $s[0]->medium);
+////        $c = $query2->result();
+//        $query = $this->db->query("SELECT * FROM student_master where class_id=" . $s[0]->class_id);
+//        return $query->result();
+////        return $this->db->last_query();
+//    }
     public function fetch_section_id($id) {
-        $query1 = $this->db->query("SELECT medium,class_id FROM create_section where id=" . $id);
-        $s = $query1->result();
-//        $query2 = $this->db->query("SELECT id FROM create_class where medium=" . $s[0]->medium);
-//        $c = $query2->result();
-        $query = $this->db->query("SELECT * FROM student_master where class_id=" . $s[0]->class_id);
-        return $query->result();
+
+
+        $query = $this->db->query("SELECT * FROM student_master where id=" . $id . "");
+        $s = $query->result();
+
+        $query1 = $this->db->query("SELECT * FROM create_section where medium=" . $s[0]->medium . " and class_id=" . $s[0]->class_id . "");
+        return $query1->result();
 //        return $this->db->last_query();
     }
-
 }
 ?>
 

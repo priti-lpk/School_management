@@ -43,12 +43,14 @@ class Add_section extends CI_Controller {
         $this->form_validation->set_rules('medium', 'Medium', 'required');
         $this->form_validation->set_rules('class_id', 'Class_id', 'required');
         $this->form_validation->set_rules('section_name', 'Section_name', 'required');
+        $this->form_validation->set_rules('teacher_id', 'teacher_id', 'required');
         $this->load->model('Section', 'section');
         $this->load->helper(array('form', 'url'));
         $save = array(
             'medium' => $this->input->post('medium'),
             'class_id' => $this->input->post('class_id'),
             'section_name' => $this->input->post('section_name'),
+            'teacher_id' => $this->input->post('teacher_id'),
         );
         $this->section->create($save);
         redirect(base_url() . 'Add_section/');
@@ -81,10 +83,12 @@ class Add_section extends CI_Controller {
         $this->form_validation->set_rules('medium', 'Medium', 'required');
         $this->form_validation->set_rules('class_id', 'Class_id', 'required');
         $this->form_validation->set_rules('section_name', 'Section_name', 'required');
+        $this->form_validation->set_rules('teacher_id', 'teacher_id', 'required');
         $data1 = array(
             'medium' => $this->input->post('medium'),
             'class_id' => $this->input->post('class_id'),
             'section_name' => $this->input->post('section_name'),
+            'teacher_id' => $this->input->post('teacher_id'),
         );
         $this->section->update_section($id, $data1);
         redirect(base_url('Add_section/'));

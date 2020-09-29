@@ -40,8 +40,9 @@ class Class_report extends CI_Model {
 //    }
 
     public function fetch_cls_teacher($mid, $cid, $sid) {
-        $query = $this->db->query("SELECT create_class.class_name,teacher_master.t_fname FROM create_class INNER JOIN create_section ON create_class.id=create_section.class_id INNER JOIN teacher_master ON create_section.teacher_id=teacher_master.id WHERE create_class.id='" . $cid . "' AND create_class.medium='" . $mid . "'");
+        $query = $this->db->query("SELECT create_class.class_name,teacher_master.* FROM create_class INNER JOIN create_section ON create_class.id=create_section.class_id INNER JOIN teacher_master ON create_section.teacher_id=teacher_master.id WHERE create_class.id='" . $cid . "' AND create_class.medium='" . $mid . "' AND create_class.section_id=".$sid);
         return $query->result();
+//        return $this->db->last_query();
     }
 
 }

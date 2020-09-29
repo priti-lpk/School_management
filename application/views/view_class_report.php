@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="" id="form_data" name="party" class="form-horizontal" role="form" method="get" enctype="multipart/form-data" >  
+                                            <form action="" id="form_data" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
@@ -104,7 +104,7 @@
                                                         </select>
                                                     </div>
                                                     <div class = "button-items">
-                                                        <button type = "submit" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><i class="fa fa-search"></i></button>
+                                                        <button type = "submit" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"  onclick="getSummary();"><i class="fa fa-search"></i></button>
                                                     </div>
                                                 </div>
 
@@ -150,13 +150,23 @@
                                             <h4 class="mt-0 header-title">Class Teacher Details</h4>
                                             <table class="table mb-0">
                                                 <?php
-                                                if (!empty($cls_teacher)) {
-                                                    foreach ($cls_teacher as $a) {
+                                                if (!empty($teacher)) {
+                                                    foreach ($teacher as $a) {
                                                         ?>
                                                         <tr>
-                                                            <td><?php echo $a['t_fname']?></td>
+                                                            <td colpan="2" style="display: inline-block; text-align: centers"><img src="<?php echo base_url("Teacher/" . $a->t_image); ?>" height="100" width="100">
                                                         </tr>
-                                                    <?php }
+                                                        <tr>
+                                                            <td><b>Techer Name: </b><?php echo $a->t_fname . " " . $a->t_lastname ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Phone: </b><?php echo $a->t_mobno ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Address: </b><?php echo $a->address ?></td>
+                                                        </tr>
+                                                        <?php
+                                                    }
                                                 }
                                                 ?>
                                             </table>
@@ -272,51 +282,75 @@
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
         <script type="text/javascript">
-                                                        function mainchange() {
+                                                            function mainchange() {
 
-                                                            var med = document.getElementById("medium").value;
-                                                            var dataString = 'medium=' + med;
-                                                            $.ajax({
-                                                                url: "<?php echo base_url() . 'Add_student/get_class' ?>",
-                                                                method: "POST",
-                                                                datatype: "html",
-                                                                data: dataString,
-                                                                cache: false,
-                                                                success: function (data)
-                                                                {
-                                                                    //                                                                        alert(data);
-                                                                    $("#create_party").html(data);
-                                                                },
-                                                                error: function (errorThrown) {
-                                                                    alert(errorThrown);
-                                                                    alert("There is an error with AJAX!");
-                                                                }
-                                                            });
-                                                        }
-                                                        ;
-                                                        function subchange() {
+                                                                var med = document.getElementById("medium").value;
+                                                                var dataString = 'medium=' + med;
+                                                                $.ajax({
+                                                                    url: "<?php echo base_url() . 'View_class_report/get_class' ?>",
+                                                                    method: "POST",
+                                                                    datatype: "html",
+                                                                    data: dataString,
+                                                                    cache: false,
+                                                                    success: function (data)
+                                                                    {
+                                                                        //                                                                        alert(data);
+                                                                        $("#create_party").html(data);
+                                                                    },
+                                                                    error: function (errorThrown) {
+                                                                        alert(errorThrown);
+                                                                        alert("There is an error with AJAX!");
+                                                                    }
+                                                                });
+                                                            }
+                                                            ;
+                                                            function subchange() {
 
-                                                            var med = document.getElementById("create_party").value;
-                                                            //                                                                alert(med);
-                                                            var dataString = 'class=' + med;
-                                                            $.ajax({
-                                                                url: "<?php echo base_url() . 'Add_student/get_sub' ?>",
-                                                                method: "POST",
-                                                                datatype: "html",
-                                                                data: dataString,
-                                                                cache: false,
-                                                                success: function (data)
-                                                                {
-                                                                    //                                                                        alert(data);
-                                                                    $("#create_subject").html(data);
-                                                                },
-                                                                error: function (errorThrown) {
-                                                                    alert(errorThrown);
-                                                                    alert("There is an error with AJAX!");
-                                                                }
-                                                            });
-                                                        }
-                                                        ;
+                                                                var med = document.getElementById("create_party").value;
+                                                                //                                                                alert(med);
+                                                                var dataString = 'class=' + med;
+                                                                $.ajax({
+                                                                    url: "<?php echo base_url() . 'View_class_report/get_sub' ?>",
+                                                                    method: "POST",
+                                                                    datatype: "html",
+                                                                    data: dataString,
+                                                                    cache: false,
+                                                                    success: function (data)
+                                                                    {
+//                                                                        alert(data);
+                                                                        $("#create_subject").html(data);
+                                                                    },
+                                                                    error: function (errorThrown) {
+                                                                        alert(errorThrown);
+                                                                        alert("There is an error with AJAX!");
+                                                                    }
+                                                                });
+                                                            }
+                                                            ;
+
+        </script>
+        <script>
+            function getSummary()
+            {
+                var month = document.getElementById('medium').value
+                var type = document.getElementById('create_party').value;
+//                alert(type);
+                var sub = document.getElementById('create_subject').value;
+                var my_object = {'medium': month, 'create_party': type, 'create_subject': sub};
+
+                $.ajax({
+                    url: '<?php echo base_url() . 'View_class_report' ?>',
+                    type: 'POST',
+                    datatype: 'html',
+                    data: my_object,
+                    success: function (Data) {
+                        alert(Data);
+                        //                                                                        $('#summary').html(data);
+                    }
+
+                });
+
+            }
         </script>
     </body>
 
