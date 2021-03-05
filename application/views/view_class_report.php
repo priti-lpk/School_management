@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Student</title>
+        <title>View Class Report</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Create Student</h4>
+                                    <h4 class="page-title">View Class Report</h4>
                                 </div>
                             </div>
                         </div>
@@ -334,7 +334,7 @@
             {
                 var month = document.getElementById('medium').value
                 var type = document.getElementById('create_party').value;
-//                alert(type);
+                alert(type);
                 var sub = document.getElementById('create_subject').value;
                 var my_object = {'medium': month, 'create_party': type, 'create_subject': sub};
 

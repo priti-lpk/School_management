@@ -12,11 +12,9 @@ class Add_class extends CI_Controller {
         $this->load->model('Student_class', 'student_class');
         $users = $this->student_class->all();
         $medium = $this->student_class->get_medium();
-        $teacher = $this->student_class->get_teacher();
         $data = array();
         $data['class'] = $users;
         $data['medium'] = $medium;
-        $data['teacher'] = $teacher;
         $this->load->view('create_class', $data);
     }
 
