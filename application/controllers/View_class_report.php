@@ -9,25 +9,30 @@ class View_class_report extends CI_Controller {
     }
 
     public function index() {
-        $mid = $this->input->post('medium');
-        $cid = $this->input->post('create_party');
-        echo $cid;
-        $sid = $this->input->post('create_subject');
+        $mid = $this->input->GET('medium');
+        $cid = $this->input->GET('class_id');
+        $sid = $this->input->GET('section_id');
         $this->load->model('Class_report', 'class_report');
         $users = $this->class_report->all();
         $medium = $this->class_report->get_medium();
         $class = $this->class_report->get_class();
         $asub = $this->class_report->get_section();
-        $cls_teacher = '';
-        if (!empty($mid)) {
-//            $cls_teacher = $this->class_report->fetch_cls_teacher($mid, $cid, $sid);
-        }
+        $cls_teacher = $this->class_report->fetch_cls_teacher($mid, $cid, $sid);
+        $cls_student = $this->class_report->fetch_cls_student($mid, $cid, $sid);
+        $cls_subject = $this->class_report->fetch_cls_subject($mid, $cid);
+        $cls_subject_teacher = $this->class_report->fetch_cls_subject_teacher($mid, $cid);
         $data = array();
         $data['all'] = $users;
         $data['medium'] = $medium;
         $data['class'] = $class;
         $data['all_sub'] = $asub;
         $data['teacher'] = $cls_teacher;
+        $data['total'] = $cls_student;
+        $data['subject'] = $cls_subject;
+        $data['subject_teacher'] = $cls_subject_teacher;
+        $data['medium_id'] = $mid;
+        $data['class_id'] = $cid;
+        $data['section_id'] = $sid;
         $this->load->view('view_class_report', $data);
     }
 
@@ -55,27 +60,6 @@ class View_class_report extends CI_Controller {
         }
         $output .= '</select>';
         echo $output;
-    }
-
-    function get_report() {
-        printf("YTU");
-//        $mid = $this->input->post('medi');
-//        $cid = $this->input->post('clss');
-//        $sid = $this->input->post('sect');
-//        $this->load->model('Class_report', 'class_report');
-////        $users = $this->class_report->all();
-////        $medium = $this->class_report->get_medium();
-////        $class = $this->class_report->get_class();
-////        $asub = $this->class_report->get_section();
-////        $data = array();
-//////        $data['all'] = $this->class_report->fetch_sub_teacher($mid, $cid, $sid);
-//////        $data['cls_teacher'] = $this->class_report->fetch_cls_teacher($mid, $cid, $sid);
-////        $data['all'] = $users;
-////        $data['medium'] = $medium;
-////        $data['class'] = $class;
-////        $data['all_sub'] = $asub;
-//        echo $mid;
-//        $this->load->view('view_class_report', $data);
     }
 
 }

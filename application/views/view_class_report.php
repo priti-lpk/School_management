@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="" id="form_data" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="" id="form_data" class="form-horizontal" role="form" method="get" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
@@ -66,9 +66,9 @@
                                                             <option>Select Medium</option>
                                                             <?php
                                                             foreach ($medium as $p) {
-                                                                if (isset($users)) {
+                                                                if (isset($medium_id)) {
                                                                     ?>
-                                                                    <option <?php echo ($p->id == $users[0]['medium'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <option <?php echo ($p->id == $medium_id ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
                                                                     <?php
                                                                 } else {
                                                                     ?>
@@ -85,7 +85,7 @@
                                                             <option>Select Class</option>
                                                             <?php
                                                             foreach ($class as $val) {
-                                                                echo "<option " . ($val->id == $users[0]['class_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->class_name . "</option>";
+                                                                echo "<option " . ($val->id == $class_id ? 'selected' : '') . " value=" . $val->id . ">" . $val->class_name . "</option>";
                                                             }
                                                             ?>
                                                         </select>
@@ -98,7 +98,7 @@
                                                             <option>Select Section</option>
                                                             <?php
                                                             foreach ($all_sub as $val) {
-                                                                echo "<option " . ($val->id == $users[0]['section_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->section_name . "</option>";
+                                                                echo "<option " . ($val->id == $section_id ? 'selected' : '') . " value=" . $val->id . ">" . $val->section_name . "</option>";
                                                             }
                                                             ?>
                                                         </select>
@@ -118,27 +118,12 @@
                                 <div class="col-lg-6">
                                     <div class="card m-b-20">
                                         <div class="card-body">
-
-                                            <h4 class="mt-0 header-title">Subject And Teacher</h4>
-                                            <table class="table mb-0">
-                                                <thead class="thead-default">
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Username</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
-                                                        <td>@mdo</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
+                                            <?php
+                                            $count = count($total);
+                                            $sub_count = count($subject);
+                                            ?>
+                                            <p>Number of Students: <b><?php echo $count; ?></b></p>
+                                            <p>Total Subject of This Class: <b><?php echo $sub_count; ?></b></p>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
@@ -178,39 +163,28 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">Table head options</h4>
-                                            <p class="text-muted m-b-30">Use one of two modifier classes to make
-                                                <code>&lt;thead&gt;</code>s appear light or dark gray.
-                                            </p>
+                                            <h4 class="mt-0 header-title">Subject And Teachers</h4>
 
                                             <table class="table mb-0">
                                                 <thead class="thead-default">
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Username</th>
+                                                        <th>Subject</th>
+                                                        <th>Teacher Name</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
-                                                        <td>@mdo</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Jacob</td>
-                                                        <td>Thornton</td>
-                                                        <td>@fat</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@twitter</td>
-                                                    </tr>
+                                                    <?php
+                                                    foreach ($subject_teacher as $sub_teacher) {
+                                                        ?>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td><?php echo $sub_teacher['subject_name'] ?></td>
+                                                            <td><?php echo $sub_teacher['t_fname'] . " " . $sub_teacher['t_lastname'] ?></td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
 
@@ -329,29 +303,6 @@
                                                             ;
 
         </script>
-        <script>
-            function getSummary()
-            {
-                var month = document.getElementById('medium').value
-                var type = document.getElementById('create_party').value;
-                alert(type);
-                var sub = document.getElementById('create_subject').value;
-                var my_object = {'medium': month, 'create_party': type, 'create_subject': sub};
-
-                $.ajax({
-                    url: '<?php echo base_url() . 'View_class_report' ?>',
-                    type: 'POST',
-                    datatype: 'html',
-                    data: my_object,
-                    success: function (Data) {
-                        alert(Data);
-                        //                                                                        $('#summary').html(data);
-                    }
-
-                });
-
-            }
-        </script>
-    </body>
+            </body>
 
 </html>

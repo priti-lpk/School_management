@@ -21,8 +21,8 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Attendance <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_main_category') ?>">Teacher</a></li>
-                        <li><a href="<?php echo base_url('Add_sub_category') ?>">Student</a></li>
+                        <li><a href="<?php echo base_url('Teacher_attendance') ?>">Teacher</a></li>
+                        <li><a href="<?php echo base_url('Student_attendance') ?>">Student</a></li>
                     </ul>
                 </li>
                 <li>
@@ -80,7 +80,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-view-grid"></i><span> Reports <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
                         <li><a href="<?php echo base_url('View_class_report') ?>">Class Report</a></li>
-                        <li><a href="<?php echo base_url('View_quiz_schedule') ?>">Student Report</a></li>
+                        <li><a href="<?php echo base_url('View_student_report') ?>">Student Report</a></li>
                         <li><a href="<?php echo base_url('View_category_question') ?>">Attendance Report</a></li>
                         <li><a href="<?php echo base_url('View_result') ?>">Online Exam Report</a></li>
                         <li><a href="<?php echo base_url('View_result') ?>">Online Exam Ouestion Report</a></li>

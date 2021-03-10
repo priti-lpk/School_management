@@ -1,6 +1,6 @@
 <?php
 
-class Class_report extends CI_Model {
+class Student_report extends CI_Model {
 
     public function all() {
         $this->db->select('*');
@@ -34,24 +34,8 @@ class Class_report extends CI_Model {
         return $query->result();
     }
 
-    public function fetch_cls_teacher($mid, $cid, $sid) {
-        $query = $this->db->query("SELECT create_class.class_name,teacher_master.* FROM create_class INNER JOIN create_section ON create_class.id=create_section.class_id INNER JOIN teacher_master ON create_section.teacher_id=teacher_master.id WHERE create_class.id='" . $cid . "' AND create_class.medium='" . $mid . "' AND  create_section.id='" . $sid."'");
-        return $query->result();
-//        return $this->db->last_query();
-    }
-
     public function fetch_cls_student($mid, $cid, $sid) {
         $query = $this->db->query("SELECT create_class.class_name,student_master.* FROM create_class INNER JOIN create_section ON create_class.id=create_section.class_id INNER JOIN student_master ON student_master.section_id=create_section.id  WHERE create_class.id='" . $cid . "' AND create_class.medium='" . $mid . "' AND create_section.id='" . $sid."'");
-        return $query->result();
-    }
-
-    public function fetch_cls_subject($mid, $cid) {
-        $query = $this->db->query("SELECT * FROM `create_subject` WHERE class_id='" . $cid . "' AND medium='" . $mid."'");
-        return $query->result();
-    }
-
-    public function fetch_cls_subject_teacher($mid, $cid) {
-        $query = $this->db->query("SELECT create_subject.*,teacher_master.t_fname,teacher_master.t_lastname FROM `create_subject` INNER JOIN teacher_master ON create_subject.teacher_id=teacher_master.id WHERE create_subject.class_id='" . $cid . "' AND create_subject.medium='" . $mid."'");
         return $query->result_array();
     }
 
