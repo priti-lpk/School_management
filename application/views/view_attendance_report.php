@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>View Student Report</title>
+        <title>View Attendance Report</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">View Student Report</h4>
+                                    <h4 class="page-title">View Attendance Report</h4>
                                 </div>
                             </div>
                         </div>
@@ -103,6 +103,28 @@
                                                             ?>
                                                         </select>
                                                     </div>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Attendance Type</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="attendance_type" id="att_type">
+                                                            <option>Select Attendance Type</option>
+                                                            <option value="P" <?php
+                                                            if (isset($type)) {
+                                                                echo $type == 'P' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?>>Present</option>
+                                                            <option <?php
+                                                            if (isset($type)) {
+                                                                echo $type == 'A' ? ' selected="selected"' : '';
+                                                            }
+                                                            ?> value="A">Absent</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Select Date</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="date"  placeholder="date" id="date1" name="date" value="<?php echo isset($date) ? set_value("date", $date) : set_value(""); ?>" required="">
+                                                    </div>
                                                     <div class = "button-items">
                                                         <button type = "submit" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"  onclick="getSummary();"><i class="fa fa-search"></i></button>
                                                     </div>
@@ -113,50 +135,53 @@
                                     </div>
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">
+                                            <form action="<?php echo isset($users) ? site_url('Teacher_attendance/edit_teacher_attendance/' . $users[0]['id']) : site_url('Teacher_attendance/insert_teacher_attendance'); ?>" id="form_data" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
 
-                                            <h4 class="mt-0 header-title">View of Student Report</h4><br>
-                                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>G. R. No.</th>
-                                                        <th>Full Name</th>
-                                                        <th>Address</th>
-                                                        <th>Date of Birth</th>
-                                                        <th>Religion</th>
-                                                        <th>Blood Group</th>
-                                                        <th>Photo</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $i = 1;
-                                                    foreach ($student as $stu) {
-                                                        ?>
+                                                <h4 class="mt-0 header-title">Teacher Attendance</h4><br>
+                                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $stu['s_grno'] ?></td>
-                                                            <td><?php echo $stu['s_surname'] . " " . $stu['s_name'] . " " . $stu['s_fathername'] ?></td>
-                                                            <td><?php echo $stu['s_address'] ?></td>
-                                                            <td><?php echo $stu['s_dob'] ?></td>
-                                                            <td><?php echo $stu['s_religion'] ?></td>
-                                                            <td><?php echo $stu['blood_group'] ?></td>
-                                                            <td><img src='<?php echo base_url('Student/'.$stu['s_image']); ?>' id='image-link' alt='image' class='img-responsive' height=50 width=50 ></td>
+                                                            <th>#</th>
+                                                            <th>Full Name</th>
+                                                            <th>G. R. No.</th>
+                                                            <th>Photo</th>
+                                                            <!--<th>Attendance</th>-->
                                                         </tr>
+                                                    </thead>
+                                                    <tbody>
                                                         <?php
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
+                                                        if (isset($attendance)) {
+                                                            $i = 1;
+                                                            foreach ($attendance as $att) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td style="width: 10px;"><input type="text" name="no" value="<?php echo $i ?>" style="border: none; width: 10px;"></td>
+                                                                    <td style="width: 300px;"><input type="text" name="s_name" value="<?php echo $att['s_surname'] . " " . $att['s_name'] . " " . $att['s_fathername'] ?>" style="border: none;"></td>
+                                                                    <td style="width: 300px;"><input type="text" name="s_name" value="<?php echo $att['s_grno'] ?>" style="border: none;"></td>
+                                                                    <td><img src='<?php echo base_url('Student/' . $att['s_image']); ?>' id='image-link' alt='image' name="image" class='img-responsive' height=50 width=50 ></td>
+                                                                </tr>
+                                                                <?php
+                                                                $i++;
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                <div class="form-group row">
+                                                    <div class = "button-items">
+                                                        <button type = "submit" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"  onclick="getSummary();"><i class="fa fa-plus"></i> Add</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
                             </div>
-
                             <!--end row-->
 
 
@@ -256,7 +281,7 @@
                                                                     cache: false,
                                                                     success: function (data)
                                                                     {
-//                                                                        alert(data);
+                                                                        //                                                                        alert(data);
                                                                         $("#create_subject").html(data);
                                                                     },
                                                                     error: function (errorThrown) {

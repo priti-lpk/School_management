@@ -43,7 +43,7 @@
                     <ul class="submenu">
                         <li><a href="<?php echo base_url('Add_exam') ?>">Exam Name</a></li>
                         <li><a href="<?php echo base_url('Add_exam_schedule') ?>">Exam Schedule</a></li>
-                        <li><a href="<?php echo base_url('Add_exam_attendance') ?>">Exam Attendance</a></li>
+                        <li><a href="<?php echo base_url('Exam_attendance') ?>">Exam Attendance</a></li>
                         <li><a href="<?php echo base_url('Add_grade') ?>">Grade Details</a></li>
                     </ul>
                 </li>
@@ -81,9 +81,9 @@
                     <ul class="submenu">
                         <li><a href="<?php echo base_url('View_class_report') ?>">Class Report</a></li>
                         <li><a href="<?php echo base_url('View_student_report') ?>">Student Report</a></li>
-                        <li><a href="<?php echo base_url('View_category_question') ?>">Attendance Report</a></li>
-                        <li><a href="<?php echo base_url('View_result') ?>">Online Exam Report</a></li>
-                        <li><a href="<?php echo base_url('View_result') ?>">Online Exam Ouestion Report</a></li>
+                        <li><a href="<?php echo base_url('View_attendance_report') ?>">Attendance Report</a></li>
+<!--                        <li><a href="<?php echo base_url('View_result') ?>">Online Exam Report</a></li>
+                        <li><a href="<?php echo base_url('View_result') ?>">Online Exam Ouestion Report</a></li>-->
                     </ul>
                 </li>
             </ul>

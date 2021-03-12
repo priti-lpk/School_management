@@ -62,6 +62,20 @@ class View_class_report extends CI_Controller {
         echo $output;
     }
 
+    public function get_subject() {
+        $this->load->model('Class_report', 'class_report');
+        $medium = $this->input->post('class');
+        $class = $this->input->post('medium');
+        $val = $this->class_report->getsubject($medium, $class);
+        $output = '<select class="form-control select2 chosen" name="subject_id" id="subject_id1" required="" >';
+        $output .= '<option>Select Subject</option>';
+        foreach ($val as $row) {
+            $output .= '<option value="' . $row->id . '">' . $row->subject_name . '</option>';
+        }
+        $output .= '</select>';
+        echo $output;
+    }
+
 }
 
 ?>

@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Teacher Attendance</title>
+        <title>Student Attendance</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Teacher Attendance</h4>
+                                    <h4 class="page-title">Student Attendance</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,8 +58,51 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo base_url('Teacher_attendance/check_attandance') ?>" id="form_data" class="form-horizontal" role="form" method="get" enctype="multipart/form-data" >  
+                                            <form action="<?php echo base_url('Student_attendance/check_attandance') ?>" id="form_data" class="form-horizontal" role="form" method="get" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="medium" id="medium" onchange="mainchange();">
+                                                            <option>Select Medium</option>
+                                                            <?php
+                                                            foreach ($medium as $p) {
+                                                                if (isset($medium_id)) {
+                                                                    ?>
+                                                                    <option <?php echo ($p->id == $medium_id ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <option value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Select Class</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="class_id" id="create_party" onchange="subchange();">
+                                                            <option>Select Class</option>
+                                                            <?php
+                                                            foreach ($class as $val) {
+                                                                echo "<option " . ($val->id == $class_id ? 'selected' : '') . " value=" . $val->id . ">" . $val->class_name . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Section</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
+                                                        <select class="form-control select2" name="section_id" id="create_subject">
+                                                            <option>Select Section</option>
+                                                            <?php
+                                                            foreach ($all_sub as $val) {
+                                                                echo "<option " . ($val->id == $section_id ? 'selected' : '') . " value=" . $val->id . ">" . $val->section_name . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Select Date</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-control" type="date"  placeholder="date" id="date1" name="date" value="<?php echo isset($all) ? set_value("date", $date) : set_value(""); ?>" required="">
@@ -67,7 +110,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class = "button-items">
-                                                        <button type = "submit" name="search" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"  onclick="getSummary();"><i class="fa fa-search"></i></button>
+                                                        <button type = "submit" style="margin-left: 20px;" id = "btn_save" class = "btn btn-primary waves-effect waves-light"  onclick="getSummary();"><i class="fa fa-search"></i></button>
                                                     </div>
                                                 </div>
 
@@ -81,9 +124,9 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">
-                                            <form action="<?php echo isset($users) ? site_url('Teacher_attendance/edit_teacher_attendance/' . $users[0]['id']) : site_url('Teacher_attendance/insert_teacher_attendance'); ?>" id="form_data" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo site_url('Student_attendance/insert_student_attendance'); ?>" id="form_data" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
 
-                                                <h4 class="mt-0 header-title">Teacher Attendance</h4><br>
+                                                <h4 class="mt-0 header-title">Student Attendance</h4><br>
                                                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                     <thead>
                                                         <tr>
@@ -96,58 +139,54 @@
                                                     <tbody>
                                                         <?php
                                                         if (isset($all)) {
-
-                                                            if (!empty($all)) {
-                                                                $i = 1;
-                                                                $k = 0;
-                                                                foreach ($all as $teacher) {
-                                                                    ?>
-                                                                    <tr>
-                                                                        <td style="width: 10px;"><input type="text" name="no" value="<?php echo $i ?>" style="border: none; width: 10px;"></td>
-                                                                <input type="hidden" name="t_id[]" value="<?php echo $teacher['id'] ?>">
-                                                                <input type="hidden" name="date[]" value="<?php echo $date ?>">
-                                                                <td style="width: 300px;"><input type="text" name="t_name" value="<?php echo $teacher['t_fname'] . " " . $teacher['t_lastname'] ?>" style="border: none;"></td>
-                                                                <td><img src='<?php echo base_url('Teacher/' . $teacher['t_image']); ?>' id='image-link' alt='image' name="image" class='img-responsive' height=50 width=50 ></td>
-
-                                                                <td>
-                                                                    <?php
+                                                            $i = 1;
+                                                            $k = 0;
+                                                            foreach ($all as $student) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td style="width: 10px;"><input type="text" name="no" value="<?php echo $i ?>" style="border: none; width: 10px;"></td>
+                                                            <input type="hidden" name="s_id[]" value="<?php echo $student['id'] ?>">
+                                                            <input type="hidden" name="date[]" value="<?php echo $date ?>">
+                                                            <input type="hidden" name="medium_id[]" value="<?php echo $medium_id ?>">
+                                                            <input type="hidden" name="class_id[]" value="<?php echo $class_id ?>">
+                                                            <input type="hidden" name="section_id[]" value="<?php echo $section_id ?>">
+                                                            <td style="width: 300px;"><input type="text" name="s_name" value="<?php echo $student['s_surname'] . " " . $student['s_name'] . " " . $student['s_fathername'] ?>" style="border: none;"></td>
+                                                            <td><img src='<?php echo base_url('Student/' . $student['s_image']); ?>' id='image-link' alt='image' name="image" class='img-responsive' height=50 width=50 ></td>
+                                                            <td><?php
                                                                     if (isset($check_attandance)) {
 //                                                                        print_r($check_attandance[$k]['t_id']);
                                                                         if (!empty($check_attandance)) {
                                                                             ?>
-                                                                            <input type="radio" id="present" name="t_attendance<?php echo $i ?>[]" value="P" <?php
-                                                                            echo (($check_attandance[$k]['t_attendance'] == 'P') && ($check_attandance[$k]['t_id'] == $teacher['id']) ? 'checked' : '')
+                                                                            <input type="radio" id="present" name="s_attendance<?php echo $i ?>[]" value="P" <?php
+                                                                            echo (($check_attandance[$k]['s_attendance'] == 'P') && ($check_attandance[$k]['s_id'] == $student['id']) ? 'checked' : '')
                                                                             ?>>
                                                                             <label for="present">Present</label>
-                                                                            <input type="radio" id="absent" name="t_attendance<?php echo $i ?>[]" value="A"  <?php
-                                                                            echo (($check_attandance[$k]['t_attendance'] == 'A') && ($check_attandance[$k]['t_id'] == $teacher['id']) ? 'checked' : '')
+                                                                            <input type="radio" id="absent" name="s_attendance<?php echo $i ?>[]" value="A"  <?php
+                                                                            echo (($check_attandance[$k]['s_attendance'] == 'A') && ($check_attandance[$k]['s_id'] == $student['id']) ? 'checked' : '')
                                                                             ?>>
                                                                             <label for="absent">Absent</label>
                                                                             <?php
                                                                         } else {
                                                                             ?>
-                                                                            <input type="radio" id="present" name="t_attendance<?php echo $i ?>[]" value="P">
+                                                                            <input type="radio" id="present" name="s_attendance<?php echo $i ?>[]" value="P">
                                                                             <label for="present">Present</label>
-                                                                            <input type="radio" id="absent" name="t_attendance<?php echo $i ?>[]" value="A">
+                                                                            <input type="radio" id="absent" name="s_attendance<?php echo $i ?>[]" value="A">
                                                                             <label for="absent">Absent</label>
                                                                             <?php
                                                                         }
                                                                     } else {
                                                                         ?>
-                                                                        <input type="radio" id="present" name="t_attendance<?php echo $i ?>[]" value="P">
+                                                                        <input type="radio" id="present" name="s_attendance<?php echo $i ?>[]" value="P">
                                                                         <label for="present">Present</label>
-                                                                        <input type="radio" id="absent" name="t_attendance<?php echo $i ?>[]" value="A">
+                                                                        <input type="radio" id="absent" name="s_attendance<?php echo $i ?>[]" value="A">
                                                                         <label for="absent">Absent</label>
                                                                         <?php
                                                                     }
-                                                                    ?>
-
-                                                                </td>
-                                                                </tr>
-                                                                <?php
-                                                                $i++;
-                                                                $k++;
-                                                            }
+                                                                    ?></td>
+                                                            </tr>
+                                                            <?php
+                                                            $i++;
+                                                            $k++;
                                                         }
                                                     }
                                                     ?>
@@ -161,70 +200,70 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div> <!-- end col 
+                                </div> <!-- end col -->
                             </div>
 
                         </div>
 
-                                <!--end page content-->
+                        <!--end page content-->
 
-                            </div> <!--container-fluid -->
+                    </div> <!--container-fluid -->
 
-                        </div> <!--content -->
+                </div> <!--content -->
 
-                        <?php include 'footer.php'
-                        ?>
+                <?php include 'footer.php'
+                ?>
 
-                    </div>
-
-                    <!-- ============================================================== -->
-                    <!-- End Right content here -->
-                    <!-- ============================================================== -->
-
-
-                </div>
-                <!-- END wrapper -->
             </div>
 
-            <!-- jQuery  -->
-            <script src="<?php echo base_url() . 'assets/js/jquery.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'assets/js/bootstrap.bundle.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'assets/js/metisMenu.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'assets/js/jquery.slimscroll.js' ?>"></script>
-            <script src="<?php echo base_url() . 'assets/js/waves.min.js' ?>"></script>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
 
-            <script src="<?php echo base_url() . 'plugins/jquery-sparkline/jquery.sparkline.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/bootstrap-md-datetimepicker/js/moment-with-locales.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/bootstrap-md-datetimepicker/js/bootstrap-material-datetimepicker.js' ?>"></script>
 
-            <!-- Plugins js -->
-            <script src="<?php echo base_url() . 'plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' ?>"></script>
+        </div>
+        <!-- END wrapper -->
 
-            <script src="<?php echo base_url() . 'plugins/select2/js/select2.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/bootstrap-maxlength/bootstrap-maxlength.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/jquery.dataTables.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/dataTables.bootstrap4.min.js' ?>"></script>
-            <!-- Buttons examples -->
-            <script src="<?php echo base_url() . 'plugins/datatables/dataTables.buttons.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/buttons.bootstrap4.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/jszip.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/pdfmake.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/vfs_fonts.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/buttons.html5.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/buttons.print.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/buttons.colVis.min.js' ?>"></script>
-            <!-- Responsive examples -->
-            <script src="<?php echo base_url() . 'plugins/datatables/dataTables.responsive.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'plugins/datatables/responsive.bootstrap4.min.js' ?>"></script>
-            <script src="<?php echo base_url() . 'assets/pages/datatables.init.js' ?>"></script>
 
-            <!-- Plugins Init js -->
-            <script src="<?php echo base_url() . 'assets/pages/form-advanced.js' ?>"></script>
-            <!-- App js -->
-            <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
-            <script type="text/javascript">
+        <!-- jQuery  -->
+        <script src="<?php echo base_url() . 'assets/js/jquery.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/bootstrap.bundle.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/metisMenu.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/jquery.slimscroll.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/waves.min.js' ?>"></script>
+
+        <script src="<?php echo base_url() . 'plugins/jquery-sparkline/jquery.sparkline.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/bootstrap-md-datetimepicker/js/moment-with-locales.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/bootstrap-md-datetimepicker/js/bootstrap-material-datetimepicker.js' ?>"></script>
+
+        <!-- Plugins js -->
+        <script src="<?php echo base_url() . 'plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' ?>"></script>
+
+        <script src="<?php echo base_url() . 'plugins/select2/js/select2.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/bootstrap-maxlength/bootstrap-maxlength.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/jquery.dataTables.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/dataTables.bootstrap4.min.js' ?>"></script>
+        <!-- Buttons examples -->
+        <script src="<?php echo base_url() . 'plugins/datatables/dataTables.buttons.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/buttons.bootstrap4.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/jszip.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/pdfmake.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/vfs_fonts.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/buttons.html5.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/buttons.print.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/buttons.colVis.min.js' ?>"></script>
+        <!-- Responsive examples -->
+        <script src="<?php echo base_url() . 'plugins/datatables/dataTables.responsive.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'plugins/datatables/responsive.bootstrap4.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/pages/datatables.init.js' ?>"></script>
+
+        <!-- Plugins Init js -->
+        <script src="<?php echo base_url() . 'assets/pages/form-advanced.js' ?>"></script>
+        <!-- App js -->
+        <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
+        <script type="text/javascript">
                                                             function mainchange() {
 
                                                                 var med = document.getElementById("medium").value;
@@ -260,7 +299,7 @@
                                                                     cache: false,
                                                                     success: function (data)
                                                                     {
-                                                                        //                                                                        alert(data);
+//                                                                        alert(data);
                                                                         $("#create_subject").html(data);
                                                                     },
                                                                     error: function (errorThrown) {
@@ -271,8 +310,7 @@
                                                             }
                                                             ;
 
-            </script>
-
+        </script>
     </body>
 
 </html>
