@@ -9,7 +9,7 @@ class Index extends CI_Controller {
 
     public function index() {
 
-        $this->load->view('index');
+        $this->load->view('Teacher/login');
     }
 
     function verifyUser() {
@@ -17,7 +17,7 @@ class Index extends CI_Controller {
         $username = $this->input->post('user_username');
         $password = md5($this->input->post('user_pass'));
 
-        $this->load->model('LoginModel');
+        $this->load->model('Teacher/LoginModel');
 
         if ($this->LoginModel->Loginn($username, $password)) {
             $this->session->set_userdata('username', $username);
@@ -28,12 +28,12 @@ class Index extends CI_Controller {
                 'msg' => 'Authentication Fail!'
             );
             $this->session->set_flashdata('msg', 'Authentication Fail!');
-            redirect(base_url('Index'));
+            redirect(base_url('Teacher/login'));
         }
     }
 
     public function dashboard() {
-        $this->load->view('Dashboard');
+        $this->load->view('Teacher/Dashboard');
     }
 
 }
