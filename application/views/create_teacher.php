@@ -119,6 +119,16 @@
                                                         <input type="file" id="t_image" name="t_image" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("t_image", $users[0]['t_image']) : set_value(""); ?>" >
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Username</label>
+                                                    <div class="col-sm-4" style="margin-left: -10px;">  
+                                                        <input class="form-control" type="text"  placeholder="Username" id="username" name="username" value="<?php echo isset($users) ? set_value("username", $users[0]['username']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
+                                                    <div class="col-sm-4" style="margin-left: -80px;">  
+                                                        <input class="form-control" type="text"  placeholder="Password" id="password" name="password" value="<?php echo isset($users) ? set_value("password", $users[0]['password']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                </div>
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>
@@ -170,7 +180,7 @@
                                                                 <td><?php echo $e['address'] ?></td>
                                                                 <td><?php echo $e['t_religion'] ?></td>
                                                                 <td><?php echo $e['joining_date'] ?></td>
-                                                                <td><img src="<?php echo base_url("Teacher/" . $e['t_image']); ?>" height="60" width="60"></td>
+                                                                <td><img src="<?php echo base_url("Teachers/" . $e['t_image']); ?>" height="60" width="60"></td>
                                                                 <td><a href="<?php echo base_url() . 'Add_teacher/getdata_teacher/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
                                                                     <a href="<?php echo base_url() . 'Add_teacher/delete_teacher/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   

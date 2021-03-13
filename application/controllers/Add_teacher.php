@@ -33,6 +33,8 @@ class Add_teacher extends CI_Controller {
         $this->form_validation->set_rules('t_religion', 't_religion', 'required');
         $this->form_validation->set_rules('joining_date', 'joining_date', 'required');
         $this->form_validation->set_rules('t_image', 't_image', 'required');
+        $this->form_validation->set_rules('username', 'username', 'required');
+        $this->form_validation->set_rules('password', 'password', 'required');
         $this->load->model('Teacher', 'teacher');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
@@ -49,6 +51,8 @@ class Add_teacher extends CI_Controller {
             't_religion' => $this->input->post('t_religion'),
             'joining_date' => $this->input->post('joining_date'),
             't_image' => $url,
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
         );
         $this->teacher->create($save);
         redirect(base_url() . 'Add_teacher/');
@@ -83,12 +87,14 @@ class Add_teacher extends CI_Controller {
         $this->form_validation->set_rules('t_religion', 't_religion', 'required');
         $this->form_validation->set_rules('joining_date', 'joining_date', 'required');
         $this->form_validation->set_rules('t_image', 't_image', 'required');
+        $this->form_validation->set_rules('username', 'username', 'required');
+        $this->form_validation->set_rules('password', 'password', 'required');
         $filename = $_FILES["t_image"]["name"];
         $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
         $image = $id . "." . $file_ext;
         $type = explode('.', $_FILES['t_image']['name']);
         $type = $type[count($type) - 1];
-        $url = "Teacher/" . $image;
+        $url = "Teachers/" . $image;
         $config['upload_path'] = './Teacher/'; //The path where the image will be save
         $config['allowed_types'] = 'jpg|jpeg|png|gif'; //Images extensions accepted
         $config['file_name'] = $image;
@@ -110,6 +116,8 @@ class Add_teacher extends CI_Controller {
             't_religion' => $this->input->post('t_religion'),
             'joining_date' => $this->input->post('joining_date'),
             't_image' => $image,
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
         );
         $this->teacher->update_teacher($id, $data1);
         redirect(base_url('Add_teacher/'));
@@ -145,7 +153,7 @@ class Add_teacher extends CI_Controller {
         $image = $id . "." . $file_ext;
         $type = explode('.', $_FILES['t_image']['name']);
         $type = $type[count($type) - 1];
-        $url = "Teacher/" . $image;
+        $url = "Teachers/" . $image;
         if (in_array($type, array("jpg", "gif", "png", "jpeg", "PNG", "JPG", "GIF", "JPEG")))
             if (is_uploaded_file($_FILES['t_image']['tmp_name']))
                 if (move_uploaded_file($_FILES['t_image']['tmp_name'], $url))
