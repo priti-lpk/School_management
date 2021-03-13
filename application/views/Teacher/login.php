@@ -37,7 +37,7 @@
                         <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
                         <p class="text-muted text-center">Sign in to continue to School Management</p>
 
-                        <form class="form-horizontal m-t-30" action="<?php echo base_url('Index/verifyUser') ?>" method="post">
+                        <form class="form-horizontal m-t-30" action="<?php echo base_url('teacher/Index/verifyUser') ?>" method="post">
 
                             <div class="form-group">
                                 <label for="username">Username</label>
