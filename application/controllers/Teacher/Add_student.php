@@ -5,15 +5,16 @@ class Add_student extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url', 'form');
-        if ($this->session->userdata('username')) {
-            
-        } else {
-            redirect(base_url(index));
-        }
+        $this->load->library('session');
+//        if ($this->session->userdata('username')) {
+//            
+//        } else {
+//            redirect(base_url(index));
+//        }
     }
 
     public function index() {
-        $this->load->model('Teacher/Student', 'Teacher/student');
+        $this->load->model('Teacher/Student', 'student');
         $users = $this->student->all();
         $medium = $this->student->get_medium();
         $class = $this->student->get_class();
@@ -23,7 +24,7 @@ class Add_student extends CI_Controller {
         $data['medium'] = $medium;
         $data['class'] = $class;
         $data['all_sub'] = $asub;
-        $this->load->view('Teacher/Index/create_student', $data);
+        $this->load->view('Teacher/create_student', $data);
     }
 
     public function get_class() {
