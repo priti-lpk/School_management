@@ -8,7 +8,7 @@ class Index extends CI_Controller {
     }
 
     public function index() {
-        echo "fgjk";
+        //echo "fgjk";
         $this->load->view('Teacher/login');
     }
 
@@ -21,10 +21,10 @@ class Index extends CI_Controller {
 
         if ($this->LoginModel->Loginn($username, $password)) {
             $this->session->set_userdata('username', $username);
-            redirect(base_url('teacher/Index/dashboard'));
+            redirect(base_url('Teacher/Index/dashboard'));
         } else {
 
-            $data = array(
+            $data = array(  
                 'msg' => 'Authentication Fail!'
             );
             $this->session->set_flashdata('msg', 'Authentication Fail!');
