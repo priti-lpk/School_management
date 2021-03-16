@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_exam_schedule/edit_exam_schedule/' . $users[0]['id']) : site_url('Add_exam_schedule/insert_exam_schedule'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Teacher/Add_exam_schedule/edit_exam_schedule/' . $users[0]['id']) : site_url('Teacher/Add_exam_schedule/insert_exam_schedule'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -183,8 +183,8 @@
                                                                 <td><?php echo $e['date'] ?></td>
                                                                 <td><?php echo $e['start_time'] ?></td>
                                                                 <td><?php echo $e['end_time'] ?></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_exam_schedule/getdata_exam_schedule/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_exam_schedule/delete_exam_schedule/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><a href="<?php echo base_url() . 'Teacher/Add_exam_schedule/getdata_exam_schedule/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Teacher/Add_exam_schedule/delete_exam_schedule/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -265,7 +265,7 @@
                                                                     var med = document.getElementById("medium").value;
                                                                     var dataString = 'medium=' + med;
                                                                     $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_exam_schedule/get_class' ?>",
+                                                                        url: "<?php echo base_url() . 'Teacher/Add_exam_schedule/get_class' ?>",
                                                                         method: "POST",
                                                                         datatype: "html",
                                                                         data: dataString,
@@ -288,7 +288,7 @@
                                                                     //                                                                alert(med);
                                                                     var dataString = 'class=' + med;
                                                                     $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_assignment/get_sub' ?>",
+                                                                        url: "<?php echo base_url() . 'Teacher/Add_assignment/get_sub' ?>",
                                                                         method: "POST",
                                                                         datatype: "html",
                                                                         data: dataString,

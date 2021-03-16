@@ -28,7 +28,7 @@ class Add_student extends CI_Controller {
     }
 
     public function get_class() {
-        $this->load->model('Student', 'student');
+        $this->load->model('Teacher/Student', 'student');
         $medium = $this->input->post('medium');
         $val = $this->student->getcls($medium);
         $output = '<select class="form-control select2 chosen" name="class_id" id="create_party" required="" >';
@@ -41,7 +41,7 @@ class Add_student extends CI_Controller {
     }
 
     public function get_sub() {
-        $this->load->model('Student', 'student');
+        $this->load->model('Teacher/Student', 'student');
         $medium = $this->input->post('class');
         $val = $this->student->getsub($medium);
         $output = '<select class="form-control select2 chosen" name="section_id" id="subject_id" required="" >';
@@ -66,7 +66,7 @@ class Add_student extends CI_Controller {
         $this->form_validation->set_rules('section_id', 'section_id', 'required');
         $this->form_validation->set_rules('blood_group', 'blood_group', 'required');
         $this->form_validation->set_rules('s_image', 's_image', 'required');
-        $this->load->model('Student', 'student');
+        $this->load->model('Teacher/Student', 'student');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
         $save = array(
@@ -84,11 +84,11 @@ class Add_student extends CI_Controller {
             's_image' => $url
         );
         $this->student->create($save);
-        redirect(base_url() . 'Add_student/');
+        redirect(base_url() . 'Teacher/Add_student/');
     }
 
     function getdata_student($id) {
-        $this->load->model('Student', 'student');
+        $this->load->model('Teacher/Student', 'student');
         $users1 = $this->student->edit_id($id);
         $users = $this->student->all();
         $medium = $this->student->get_medium();
@@ -101,7 +101,7 @@ class Add_student extends CI_Controller {
         $data['class'] = $class;
         $data['all_sub'] = $subject;
 //        print_r($data['all_sub']);
-        $this->load->view('create_student', $data);
+        $this->load->view('Teacher/create_student', $data);
     }
 
     function do_upload() {

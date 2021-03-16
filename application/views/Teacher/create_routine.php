@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Exam Schedule</title>
+        <title>Routine</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Exam Schedule</h4>
+                                    <h4 class="page-title">Create Routine</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_exam_schedule/edit_exam_schedule/' . $users[0]['id']) : site_url('Add_exam_schedule/insert_exam_schedule'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Teacher/Add_routine/edit_routine/' . $users[0]['id']) : site_url('Teacher/Add_routine/insert_routine'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -81,7 +81,7 @@
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select class</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
-                                                        <select class="form-control select2" name="class_id" id="create_party" onchange="subchange();">
+                                                        <select class="form-control select2" name="class_id" id="create_party">
                                                             <option>Select Class</option>
                                                             <?php
                                                             foreach ($class as $val) {
@@ -91,56 +91,25 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Subject</label>
-                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
-                                                        <select class="form-control select2" name="subject_id" id="create_subject">
-                                                            <option>Select Subject</option>
-                                                            <?php
-                                                            foreach ($all_sub as $val) {
-                                                                echo "<option " . ($val->id == $users[0]['subject_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->subject_name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Day</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "text" placeholder = "Day" id = "day" name = "day" value = "<?php echo isset($users) ? set_value("day", $users[0]['day']) : set_value(""); ?>" required = "">
                                                     </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Exam</label>
-                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
-                                                        <select class="form-control select2" name="exam_id" id="exam">
-                                                            <option>Select Exam</option>
-                                                            <?php
-                                                            foreach ($exam as $e) {
-                                                                if (isset($users)) {
-                                                                    ?>
-                                                                    <option <?php echo ($e->id == $users[0]['exam_id'] ? 'selected' : '') ?> value="<?php echo $e->id; ?>" ><?php echo $e->exam_name; ?></option>
-                                                                    <?php
-                                                                } else {
-                                                                    ?>
-                                                                    <option value="<?php echo $e->id; ?>" ><?php echo $e->exam_name; ?></option>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Starting Time</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "time" placeholder = "Starting Time" id = "starting_time" name = "starting_time" value = "<?php echo isset($users) ? set_value("starting_time", $users[0]['starting_time']) : set_value(""); ?>" required = "">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Date</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="date"  placeholder="Date" id="date1" name="date" value="<?php echo isset($users) ? set_value("date", $users[0]['date']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Start Time</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="time"  placeholder="start Time" id="start_time" name="start_time" value="<?php echo isset($users) ? set_value("start_time", $users[0]['start_time']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">End Time</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="time"  placeholder="End Time" id="end_time" name="end_time" value="<?php echo isset($users) ? set_value("end_time", $users[0]['end_time']) : set_value(""); ?>" required="">
+                                                <div class = "form-group row">
+                                                    <label for = "example-text-input" class = "col-sm-2 col-form-label">Ending Time</label>
+                                                    <div class = "col-sm-4" style = "margin-left: -80px;">
+                                                        <input class = "form-control" type = "time" placeholder = "Ending Time" id = "ending_time" name = "ending_time" value = "<?php echo isset($users) ? set_value("ending_time", $users[0]['ending_time']) : set_value(""); ?>" required = "">
                                                     </div>
                                                 </div>
                                                 <div class = "button-items">
-                                                    <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
+                                                    <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save')
+                                                            ?></button>
                                                 </div>
                                             </form>
                                         </div>
@@ -153,18 +122,16 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Exam Schedule</h4><br>
+                                            <h4 class="mt-0 header-title">View of Routine</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Medium</th>
                                                         <th>Class Name</th>
-                                                        <th>Subject Name</th>
-                                                        <th>Exam Name</th>
-                                                        <th>Date</th>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
+                                                        <th>Day</th>
+                                                        <th>Starting Time</th>
+                                                        <th>Ending Time</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
@@ -172,19 +139,17 @@
                                                     <?php
                                                     if (!empty($all)) {
                                                         $i = 1;
-                                                        foreach ($all as $e) {
+                                                        foreach ($all as $a) {
                                                             ?>
                                                             <tr>
-                                                                <td><?php echo $e['id']; ?></td>
-                                                                <td><?php echo $e['medium_name'] ?></td>
-                                                                <td><?php echo $e['class_name'] ?></td>
-                                                                <td><?php echo $e['subject_name'] ?></td>
-                                                                <td><?php echo $e['exam_name'] ?></td>
-                                                                <td><?php echo $e['date'] ?></td>
-                                                                <td><?php echo $e['start_time'] ?></td>
-                                                                <td><?php echo $e['end_time'] ?></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_exam_schedule/getdata_exam_schedule/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_exam_schedule/delete_exam_schedule/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><?php echo $a['id']; ?></td>
+                                                                <td><?php echo $a['medium_name'] ?></td>
+                                                                <td><?php echo $a['class_name'] ?></td>
+                                                                <td><?php echo $a['day'] ?></td>
+                                                                <td><?php echo $a['starting_time'] ?></td>
+                                                                <td><?php echo $a['ending_time'] ?></td>
+                                                                <td><a href="<?php echo base_url() . 'Teacher/Add_routine/getdata_routine/' . $a['iid'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Teacher/Add_routine/delete_routine/' . $a['iid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -265,38 +230,15 @@
                                                                     var med = document.getElementById("medium").value;
                                                                     var dataString = 'medium=' + med;
                                                                     $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_exam_schedule/get_class' ?>",
+                                                                        url: "<?php echo base_url() . 'Teacher/Add_section/get_class' ?>",
                                                                         method: "POST",
                                                                         datatype: "html",
                                                                         data: dataString,
                                                                         cache: false,
                                                                         success: function (data)
                                                                         {
-                                                                            //                                                                        alert(data);
+//                        alert(data);
                                                                             $("#create_party").html(data);
-                                                                        },
-                                                                        error: function (errorThrown) {
-                                                                            alert(errorThrown);
-                                                                            alert("There is an error with AJAX!");
-                                                                        }
-                                                                    });
-                                                                }
-                                                                ;
-                                                                function subchange() {
-
-                                                                    var med = document.getElementById("create_party").value;
-                                                                    //                                                                alert(med);
-                                                                    var dataString = 'class=' + med;
-                                                                    $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_assignment/get_sub' ?>",
-                                                                        method: "POST",
-                                                                        datatype: "html",
-                                                                        data: dataString,
-                                                                        cache: false,
-                                                                        success: function (data)
-                                                                        {
-//                                                                        alert(data);
-                                                                            $("#create_subject").html(data);
                                                                         },
                                                                         error: function (errorThrown) {
                                                                             alert(errorThrown);

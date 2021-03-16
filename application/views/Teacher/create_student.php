@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_student/edit_student/' . $users[0]['id']) : site_url('Add_student/insert_student'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Teacher/Add_student/edit_student/' . $users[0]['id']) : site_url('Teacher/Add_student/insert_student'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -20px;">
@@ -240,8 +240,8 @@
                                                                 <td><?php echo $e['section_name'] ?></td>
                                                                 <td><?php echo $e['blood_group'] ?></td>
                                                                 <td><img src="<?php echo base_url("Student/" . $e['s_image']); ?>" height="60" width="60"></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_student/getdata_student/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_student/delete_student/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><a href="<?php echo base_url() . 'Teacher/Add_student/getdata_student/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Teacher/Add_student/delete_student/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }

@@ -5,11 +5,11 @@ class Add_parents extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url', 'form');
-        if ($this->session->userdata('username')) {
-            
-        } else {
-            redirect(base_url(index));
-        }
+//        if ($this->session->userdata('username')) {
+//            
+//        } else {
+//            redirect(base_url(index));
+//        }
     }
 
     public function index() {
@@ -17,7 +17,7 @@ class Add_parents extends CI_Controller {
         $users = $this->parents->all();
         $data = array();
         $data['all'] = $users;
-        $this->load->view('create_parents', $data);
+        $this->load->view('Teacher/create_parents', $data);
     }
 
     function insert_parents() {
@@ -34,7 +34,7 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('pin_code', 'pin_code', 'required');
         $this->form_validation->set_rules('address', 'address', 'required');
         $this->form_validation->set_rules('proof', 'proof', 'required');
-        $this->load->model('Parents', 'parents');
+        $this->load->model('Teacher/Parents', 'parents');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
         $save = array(
@@ -53,21 +53,21 @@ class Add_parents extends CI_Controller {
             'proof' => $url,
         );
         $this->parents->create($save);
-        redirect(base_url() . 'Add_parents/');
+        redirect(base_url() . 'Teacher/Add_parents/');
     }
 
     function getdata_parents($id) {
-        $this->load->model('Parents', 'parents');
+        $this->load->model('Teacher/Parents', 'parents');
         $users1 = $this->parents->edit_id($id);
         $users = $this->parents->all();
         $data = array();
         $data['all'] = $users;
         $data['users'] = $users1;
-        $this->load->view('create_parents', $data);
+        $this->load->view('Teacher/create_parents', $data);
     }
 
     function edit_parents($id) {
-        $this->load->model('Parents', 'parents');
+        $this->load->model('Teacher/Parents', 'parents');
         $data1 = array();
         $users1 = $this->parents->all();
         $users = $this->parents->edit_id($id);
@@ -116,11 +116,11 @@ class Add_parents extends CI_Controller {
             'proof' => $image,
         );
         $this->parents->update_parents($id, $data1);
-        redirect(base_url('Add_parents/'));
+        redirect(base_url('Teacher/Add_parents/'));
     }
 
     function delete_parents($id) {
-        $this->load->model('Parents', 'parents');
+        $this->load->model('Teacher/Parents', 'parents');
         $query_get_image = $this->db->get_where('parents_master', array('id' => $id));
         foreach ($query_get_image->result() as $record) {
             $filename1 = $record->proof;
@@ -129,7 +129,7 @@ class Add_parents extends CI_Controller {
                 unlink($filename);
             }
             $this->parents->delete_parents($id);
-            redirect(base_url('Add_parents'));
+            redirect(base_url('Teacher/Add_parents'));
         }
     }
 

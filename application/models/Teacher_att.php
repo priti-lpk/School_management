@@ -19,6 +19,7 @@ class Teacher_att extends CI_Model {
             $this->db->select('*');
             $this->db->from('teacher_attendance_sheet');
             $this->db->where('date', $date);
+            $this->db->order_by('t_id', 'asc');
             $query = $this->db->get();
             return $query->result_array();
         }

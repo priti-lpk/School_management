@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Exam Schedule</title>
+        <title>Assignment</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <link rel="shortcut icon" href="<?php echo base_url() . 'assets/images/favicon.ico' ?>">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Exam Schedule</h4>
+                                    <h4 class="page-title">Create Assignment</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_exam_schedule/edit_exam_schedule/' . $users[0]['id']) : site_url('Add_exam_schedule/insert_exam_schedule'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Teacher/Add_assignment/edit_assignment/' . $users[0]['id']) : site_url('Teacher/Add_assignment/insert_assignment'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Medium</label>
                                                     <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
@@ -103,42 +103,17 @@
                                                             ?>
                                                         </select>
                                                     </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label" style="width:300px;">Select Exam</label>
-                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -80px;">
-                                                        <select class="form-control select2" name="exam_id" id="exam">
-                                                            <option>Select Exam</option>
-                                                            <?php
-                                                            foreach ($exam as $e) {
-                                                                if (isset($users)) {
-                                                                    ?>
-                                                                    <option <?php echo ($e->id == $users[0]['exam_id'] ? 'selected' : '') ?> value="<?php echo $e->id; ?>" ><?php echo $e->exam_name; ?></option>
-                                                                    <?php
-                                                                } else {
-                                                                    ?>
-                                                                    <option value="<?php echo $e->id; ?>" ><?php echo $e->exam_name; ?></option>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Deadline</label>
+                                                    <div class="col-sm-4" style="margin-left: -80px;">
+                                                        <input class="form-control" type="date"  placeholder="Deadline" id="deadline" name="deadline" value="<?php echo isset($users) ? set_value("deadline", $users[0]['deadline']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                </div><div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">File</label>
+                                                    <div class="col-sm-4" style="margin-left: -80px;">
+                                                        <input type="file" id="file" name="file" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("file", $users[0]['file']) : set_value(""); ?>" >
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Date</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="date"  placeholder="Date" id="date1" name="date" value="<?php echo isset($users) ? set_value("date", $users[0]['date']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Start Time</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="time"  placeholder="start Time" id="start_time" name="start_time" value="<?php echo isset($users) ? set_value("start_time", $users[0]['start_time']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-sm-2 col-form-label">End Time</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">
-                                                        <input class="form-control" type="time"  placeholder="End Time" id="end_time" name="end_time" value="<?php echo isset($users) ? set_value("end_time", $users[0]['end_time']) : set_value(""); ?>" required="">
-                                                    </div>
-                                                </div>
+
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>
@@ -153,7 +128,7 @@
                                     <div class="card m-b-20">
                                         <div class="card-body">
 
-                                            <h4 class="mt-0 header-title">View of Exam Schedule</h4><br>
+                                            <h4 class="mt-0 header-title">View of Assignment</h4><br>
                                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
@@ -161,10 +136,8 @@
                                                         <th>Medium</th>
                                                         <th>Class Name</th>
                                                         <th>Subject Name</th>
-                                                        <th>Exam Name</th>
-                                                        <th>Date</th>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
+                                                        <th>Deadline</th>
+                                                        <th>File</th>
                                                         <th class="noExport">Action</th>
                                                     </tr>
                                                 </thead>
@@ -179,12 +152,10 @@
                                                                 <td><?php echo $e['medium_name'] ?></td>
                                                                 <td><?php echo $e['class_name'] ?></td>
                                                                 <td><?php echo $e['subject_name'] ?></td>
-                                                                <td><?php echo $e['exam_name'] ?></td>
-                                                                <td><?php echo $e['date'] ?></td>
-                                                                <td><?php echo $e['start_time'] ?></td>
-                                                                <td><?php echo $e['end_time'] ?></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_exam_schedule/getdata_exam_schedule/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_exam_schedule/delete_exam_schedule/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><?php echo $e['deadline'] ?></td>                                                                
+                                                                <td><a href="<?php echo base_url("Assignment/" . $e['file']); ?>" target="_blank" download><?php echo $e['file'] ?></a></td>
+                                                                <td><a href="<?php echo base_url() . 'Teacher/Add_assignment/getdata_assignment/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Teacher/Add_assignment/delete_assignment/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
@@ -260,51 +231,51 @@
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
         <script type="text/javascript">
-                                                                function mainchange() {
+                                                                        function mainchange() {
 
-                                                                    var med = document.getElementById("medium").value;
-                                                                    var dataString = 'medium=' + med;
-                                                                    $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_exam_schedule/get_class' ?>",
-                                                                        method: "POST",
-                                                                        datatype: "html",
-                                                                        data: dataString,
-                                                                        cache: false,
-                                                                        success: function (data)
-                                                                        {
-                                                                            //                                                                        alert(data);
-                                                                            $("#create_party").html(data);
-                                                                        },
-                                                                        error: function (errorThrown) {
-                                                                            alert(errorThrown);
-                                                                            alert("There is an error with AJAX!");
+                                                                            var med = document.getElementById("medium").value;
+                                                                            var dataString = 'medium=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Teacher/Add_assignment/get_class' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+                                                                                    //                                                                        alert(data);
+                                                                                    $("#create_party").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
                                                                         }
-                                                                    });
-                                                                }
-                                                                ;
-                                                                function subchange() {
+                                                                        ;
+                                                                        function subchange() {
 
-                                                                    var med = document.getElementById("create_party").value;
-                                                                    //                                                                alert(med);
-                                                                    var dataString = 'class=' + med;
-                                                                    $.ajax({
-                                                                        url: "<?php echo base_url() . 'Add_assignment/get_sub' ?>",
-                                                                        method: "POST",
-                                                                        datatype: "html",
-                                                                        data: dataString,
-                                                                        cache: false,
-                                                                        success: function (data)
-                                                                        {
+                                                                            var med = document.getElementById("create_party").value;
+                                                                            //                                                                alert(med);
+                                                                            var dataString = 'class=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Teacher/Add_assignment/get_sub' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
 //                                                                        alert(data);
-                                                                            $("#create_subject").html(data);
-                                                                        },
-                                                                        error: function (errorThrown) {
-                                                                            alert(errorThrown);
-                                                                            alert("There is an error with AJAX!");
+                                                                                    $("#create_subject").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
                                                                         }
-                                                                    });
-                                                                }
-                                                                ;
+                                                                        ;
         </script>
     </body>
 

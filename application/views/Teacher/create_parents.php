@@ -58,7 +58,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">                   
-                                            <form action="<?php echo isset($users) ? site_url('Add_parents/edit_parents/' . $users[0]['id']) : site_url('Add_parents/insert_parents'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
+                                            <form action="<?php echo isset($users) ? site_url('Teacher/Add_parents/edit_parents/' . $users[0]['id']) : site_url('Teacher/Add_parents/insert_parents'); ?>" id="form_data" name="party" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >  
                                                 <div class="form-group row">
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">First Name</label>
                                                     <div class="col-sm-4" style="margin-left: -95px;">
@@ -175,8 +175,8 @@
                                                                 <td><?php echo $e['pin_code'] ?></td>
                                                                 <td><?php echo $e['address'] ?></td>
                                                                 <td><img src="<?php echo base_url("Parents/" . $e['proof']); ?>" height="60" width="60"></td>
-                                                                <td><a href="<?php echo base_url() . 'Add_parents/getdata_parents/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-                                                                    <a href="<?php echo base_url() . 'Add_parents/delete_parents/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
+                                                                <td><a href="<?php echo base_url() . 'Teacher/Add_parents/getdata_parents/' . $e['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+                                                                    <a href="<?php echo base_url() . 'Teacher/Add_parents/delete_parents/' . $e['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></td>
                                                             </tr>   
                                                             <?php
                                                         }
