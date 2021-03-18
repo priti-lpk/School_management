@@ -34,6 +34,8 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('pin_code', 'pin_code', 'required');
         $this->form_validation->set_rules('address', 'address', 'required');
         $this->form_validation->set_rules('proof', 'proof', 'required');
+        $this->form_validation->set_rules('username', 'username', 'required');
+        $this->form_validation->set_rules('password', 'password', 'required');
         $this->load->model('Teacher/Parents', 'parents');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
@@ -51,6 +53,8 @@ class Add_parents extends CI_Controller {
             'pin_code' => $this->input->post('pin_code'),
             'address' => $this->input->post('address'),
             'proof' => $url,
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
         );
         $this->parents->create($save);
         redirect(base_url() . 'Teacher/Add_parents/');
@@ -86,6 +90,8 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('pin_code', 'pin_code', 'required');
         $this->form_validation->set_rules('address', 'address', 'required');
         $this->form_validation->set_rules('proof', 'proof', 'required');
+        $this->form_validation->set_rules('username', 'username', 'required');
+        $this->form_validation->set_rules('password', 'password', 'required');
         $filename = $_FILES["proof"]["name"];
         $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
         $image = $id . "." . $file_ext;
@@ -114,6 +120,8 @@ class Add_parents extends CI_Controller {
             'pin_code' => $this->input->post('pin_code'),
             'address' => $this->input->post('address'),
             'proof' => $image,
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
         );
         $this->parents->update_parents($id, $data1);
         redirect(base_url('Teacher/Add_parents/'));

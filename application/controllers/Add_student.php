@@ -65,6 +65,8 @@ class Add_student extends CI_Controller {
         $this->form_validation->set_rules('section_id', 'section_id', 'required');
         $this->form_validation->set_rules('blood_group', 'blood_group', 'required');
         $this->form_validation->set_rules('s_image', 's_image', 'required');
+        $this->form_validation->set_rules('username', 'username', 'required');
+        $this->form_validation->set_rules('password', 'password', 'required');
         $this->load->model('Student', 'student');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
@@ -80,7 +82,9 @@ class Add_student extends CI_Controller {
             'class_id' => $this->input->post('class_id'),
             'section_id' => $this->input->post('section_id'),
             'blood_group' => $this->input->post('blood_group'),
-            's_image' => $url
+            's_image' => $url,
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
         );
         $this->student->create($save);
         redirect(base_url() . 'Add_student/');

@@ -190,6 +190,17 @@
                                                         <input class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" type="file"  placeholder="Image" id="s_image" name="s_image" value="<?php echo isset($users) ? set_value("s_image", $users[0]['s_image']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-2 col-form-label">Username</label>
+                                                    <div class="col-sm-4" style="margin-left: -20px;">  
+                                                        <input class="form-control" type="text"  placeholder="Username" id="username" name="username" value="<?php echo isset($users) ? set_value("username", $users[0]['username']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Password</label>
+                                                    <div class="col-sm-4" style="margin-left: -20px;">  
+                                                        <input class="form-control" type="text"  placeholder="Password" id="password" name="password" value="<?php echo isset($users) ? set_value("password", $users[0]['password']) : set_value(""); ?>" required="">
+                                                    </div>
+                                                </div>
+                                                
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>
