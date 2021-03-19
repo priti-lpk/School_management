@@ -125,16 +125,60 @@
                                                         <input class="form-control" type="text"  placeholder="Username" id="username" name="username" value="<?php echo isset($users) ? set_value("username", $users[0]['username']) : set_value(""); ?>" required="">
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
-                                                    <div class="col-sm-4" style="margin-left: -80px;">  
+                                                    <div class="col-sm-4" style="margin-left: -70px;">  
                                                         <input class="form-control" type="text"  placeholder="Password" id="password" name="password" value="<?php echo isset($users) ? set_value("password", $users[0]['password']) : set_value(""); ?>" required="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label" >Select Medium</label>
+                                                    <div class="col-sm-4" id="partylist5" style="margin-left: -10px;">
+                                                        <select class="form-control select2" name="medium" id="medium" onchange="mainchange();">
+                                                            <option>Select Medium</option>
+                                                            <?php
+                                                            foreach ($medium as $p) {
+                                                                if (isset($users)) {
+                                                                    ?>
+                                                                    <option <?php echo ($p->id == $users[0]['medium'] ? 'selected' : '') ?> value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <option value="<?php echo $p->id; ?>" ><?php echo $p->medium_name; ?></option>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Select Class</label>
+                                                    <div class="col-sm-4" id="partylist5" >
+                                                        <select class="form-control select2" name="class_id" id="create_party" onchange="subchange()">
+                                                            <option>Select Class</option>
+                                                            <?php
+                                                            foreach ($class as $val) {
+                                                                echo "<option " . ($val->id == $users[0]['class_id'] ? 'selected' : '') . " value=" . $val->id . ">" . $val->class_name . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-sm-1 col-form-label">Select Student</label>
+                                                    <div class="col-sm-4" id="partylist5" >
+                                                        <select class="form-control select2" name="s_id" id="create_student">
+                                                            <option>Select Student</option>
+                                                            <?php
+                                                            foreach ($all_stu as $s) {
+                                                                echo "<option " . ($s->id == $users[0]['s_id'] ? 'selected' : '') . " value=" . $s->id . ">" . $s->s_surname . " " . $s->s_name . " " . $s->s_fathername . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Proof</label>
                                                     <div class="col-sm-4" style="margin-left: -10px;">
                                                         <input type="file" id="proof" name="proof" class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" value="<?php echo isset($users) ? set_value("proof", $users[0]['proof']) : set_value(""); ?>" >
                                                     </div>
                                                 </div>
+
                                                 <div class = "button-items">
                                                     <button type = "submit" id = "btn_save" class = "btn btn-primary waves-effect waves-light"><?php echo (isset($users) ? 'Edit' : 'Save') ?></button>
                                                 </div>
@@ -261,7 +305,53 @@
         <script src="<?php echo base_url() . 'assets/pages/form-advanced.js' ?>"></script>
         <!-- App js -->
         <script src="<?php echo base_url() . 'assets/js/app.js' ?>"></script>
+        <script>
+                                                                        function mainchange() {
 
+                                                                            var med = document.getElementById("medium").value;
+                                                                            var dataString = 'medium=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_student/get_class' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+                                                                                    //                                                                        alert(data);
+                                                                                    $("#create_party").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
+                                                                        function subchange() {
+
+                                                                            var med = document.getElementById("create_party").value;
+                                                                            //                                                                alert(med);
+                                                                            var dataString = 'class=' + med;
+                                                                            $.ajax({
+                                                                                url: "<?php echo base_url() . 'Add_parents/get_sub' ?>",
+                                                                                method: "POST",
+                                                                                datatype: "html",
+                                                                                data: dataString,
+                                                                                cache: false,
+                                                                                success: function (data)
+                                                                                {
+//                                                                                    alert(data);
+                                                                                    $("#create_student").html(data);
+                                                                                },
+                                                                                error: function (errorThrown) {
+                                                                                    alert(errorThrown);
+                                                                                    alert("There is an error with AJAX!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        ;
+        </script>
     </body>
 
 </html>

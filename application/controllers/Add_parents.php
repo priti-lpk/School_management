@@ -15,9 +15,41 @@ class Add_parents extends CI_Controller {
     public function index() {
         $this->load->model('Parents', 'parents');
         $users = $this->parents->all();
+        $medium = $this->parents->get_medium();
+        $class = $this->parents->get_class();
+        $asub = $this->parents->get_student();
         $data = array();
         $data['all'] = $users;
+        $data['medium'] = $medium;
+        $data['class'] = $class;
+        $data['all_stu'] = $asub;
         $this->load->view('create_parents', $data);
+    }
+
+    public function get_class() {
+        $this->load->model('Parents', 'parents');
+        $medium = $this->input->post('medium');
+        $val = $this->parents->getcls($medium);
+        $output = '<select class="form-control select2 chosen" name="class_id" id="create_party" required="" >';
+        $output .= '<option>Select Class</option>';
+        foreach ($val as $row) {
+            $output .= '<option value="' . $row->id . '">' . $row->class_name . '</option>';
+        }
+        $output .= '</select>';
+        echo $output;
+    }
+
+    public function get_sub() {
+        $this->load->model('Parents', 'parents');
+        $medium = $this->input->post('class');
+        $val = $this->parents->getsub($medium);
+        $output = '<select class="form-control select2 chosen" name="s_id" id="subject_id" required="" >';
+        $output .= '<option>Select Student</option>';
+        foreach ($val as $row) {
+            $output .= '<option value="' . $row['id'] . '">' . $row['s_surname'] . ' ' . $row['s_name'] . ' ' . $row['s_fathername'] . '</option>';
+        }
+        $output .= '</select>';
+        echo $output;
     }
 
     function insert_parents() {
@@ -36,6 +68,9 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('proof', 'proof', 'required');
         $this->form_validation->set_rules('username', 'username', 'required');
         $this->form_validation->set_rules('password', 'password', 'required');
+        $this->form_validation->set_rules('medium', 'medium', 'required');
+        $this->form_validation->set_rules('class_id', 'class_id', 'required');
+        $this->form_validation->set_rules('s_id', 's_id', 'required');
         $this->load->model('Parents', 'parents');
         $this->load->helper(array('form', 'url'));
         $url = $this->do_upload();
@@ -55,6 +90,9 @@ class Add_parents extends CI_Controller {
             'proof' => $url,
             'username' => $this->input->post('username'),
             'password' => md5($this->input->post('password')),
+            'medium' => $this->input->post('medium'),
+            'class_id' => $this->input->post('class_id'),
+            's_id' => $this->input->post('s_id'),
         );
         $this->parents->create($save);
         redirect(base_url() . 'Add_parents/');
@@ -64,9 +102,15 @@ class Add_parents extends CI_Controller {
         $this->load->model('Parents', 'parents');
         $users1 = $this->parents->edit_id($id);
         $users = $this->parents->all();
+        $medium = $this->parents->get_medium();
+        $class = $this->parents->fetch_class_id($id);
+        $asub = $this->parents->fetch_stu_id($id);
         $data = array();
         $data['all'] = $users;
         $data['users'] = $users1;
+        $data['class'] = $class;
+        $data['medium'] = $medium;
+        $data['all_stu'] = $asub;
         $this->load->view('create_parents', $data);
     }
 
@@ -92,6 +136,9 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('proof', 'proof', 'required');
         $this->form_validation->set_rules('username', 'username', 'required');
         $this->form_validation->set_rules('password', 'password', 'required');
+        $this->form_validation->set_rules('medium', 'medium', 'required');
+        $this->form_validation->set_rules('class_id', 'class_id', 'required');
+        $this->form_validation->set_rules('s_id', 's_id', 'required');
         $filename = $_FILES["proof"]["name"];
         $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
         $image = $id . "." . $file_ext;
@@ -122,6 +169,9 @@ class Add_parents extends CI_Controller {
             'proof' => $image,
             'username' => $this->input->post('username'),
             'password' => md5($this->input->post('password')),
+            'medium' => $this->input->post('medium'),
+            'class_id' => $this->input->post('class_id'),
+            's_id' => $this->input->post('s_id'),
         );
         $this->parents->update_parents($id, $data1);
         redirect(base_url('Add_parents/'));
@@ -158,7 +208,7 @@ class Add_parents extends CI_Controller {
         $type = explode('.', $_FILES['proof']['name']);
         $type = $type[count($type) - 1];
         $url = "Parents/" . $image;
-        if (in_array($type, array("jpg", "gif", "png", "jpeg", "PNG", "JPG", "GIF", "JPEG","pdf","PDF","doc","DOC")))
+        if (in_array($type, array("jpg", "gif", "png", "jpeg", "PNG", "JPG", "GIF", "JPEG", "pdf", "PDF", "doc", "DOC")))
             if (is_uploaded_file($_FILES['proof']['tmp_name']))
                 if (move_uploaded_file($_FILES['proof']['tmp_name'], $url))
                     return $image;
