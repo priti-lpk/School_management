@@ -23,7 +23,7 @@
                         <i class="mdi mdi-clipboard"></i><span> Student Attendance </span></a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('Teacher_attendance') ?>" class="waves-effect">
+                    <a href="<?php echo base_url('Students/View_exam_schedule') ?>" class="waves-effect">
                         <i class="mdi mdi-clipboard"></i><span> Exam Schedule</span></a>
                 </li>
                 <li>
@@ -33,10 +33,10 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Schedule <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Add_subject') ?>">Subject</a></li>
-                        <li><a href="<?php echo base_url('Add_syllabus') ?>">Syllabus</a></li>
-                        <li><a href="<?php echo base_url('Add_assignment') ?>">Assignment</a></li>
-                        <li><a href="<?php echo base_url('Add_routine') ?>">Routine</a></li>
+                        <li><a href="<?php echo base_url('Students/View_subject') ?>">Subject</a></li>
+                        <li><a href="<?php echo base_url('Students/View_syllabus') ?>">Syllabus</a></li>
+                        <li><a href="<?php echo base_url('Students/View_assignment') ?>">Assignment</a></li>
+                        <li><a href="<?php echo base_url('Students/View_routine') ?>">Routine</a></li>
 
                     </ul>
                 </li>
