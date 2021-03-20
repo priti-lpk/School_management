@@ -28,7 +28,7 @@ class Index extends CI_Controller {
                 'msg' => 'Authentication Fail!'
             );
             $this->session->set_flashdata('msg', 'Authentication Fail!');
-            redirect(base_url('Teacher/login'));
+            redirect(base_url('Teacher/Index'));
         }
     }
 

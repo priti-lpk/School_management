@@ -49,7 +49,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('Teacher_attendance') ?>" class="waves-effect">
+                    <a href="<?php echo base_url('Students/View_leave') ?>" class="waves-effect">
                         <i class="mdi mdi-clipboard"></i><span> Leave Apply </span></a>
                 </li>
             </ul>

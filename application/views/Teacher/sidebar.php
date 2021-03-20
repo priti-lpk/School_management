@@ -49,7 +49,7 @@
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard"></i><span> Student Leave <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
                     <ul class="submenu">
-                        <li><a href="<?php echo base_url('Teacher/Add_main_category') ?>">View Leave</a></li>
+                        <li><a href="<?php echo base_url('Teacher/View_leave') ?>">View Leave</a></li>
                     </ul>
                 </li>
                 <li>
