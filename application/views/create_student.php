@@ -187,7 +187,7 @@
                                                     </div>
                                                     <label for="example-text-input" class="col-sm-1 col-form-label">Image</label>
                                                     <div class="col-sm-4" style="margin-left: -20px;">
-                                                        <input class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" type="file"  placeholder="Image" id="s_image" name="s_image" value="<?php echo isset($users) ? set_value("s_image", $users[0]['s_image']) : set_value(""); ?>" required="">
+                                                        <input class="form-control filestyle" data-input="false" data-buttonname="btn-secondary" type="file"  placeholder="Image" id="s_image" name="s_image" value="<?php echo isset($users) ? set_value("s_image", $users[0]['s_image']) : set_value(""); ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

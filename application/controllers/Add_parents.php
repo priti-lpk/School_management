@@ -140,39 +140,61 @@ class Add_parents extends CI_Controller {
         $this->form_validation->set_rules('class_id', 'class_id', 'required');
         $this->form_validation->set_rules('s_id', 's_id', 'required');
         $filename = $_FILES["proof"]["name"];
-        $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $image = $id . "." . $file_ext;
-        $type = explode('.', $_FILES['proof']['name']);
-        $type = $type[count($type) - 1];
-        $url = "Parents/" . $image;
-        $config['upload_path'] = './Parents/'; //The path where the image will be save
-        $config['allowed_types'] = 'jpg|jpeg|png|gif'; //Images extensions accepted
-        $config['file_name'] = $image;
-        $this->load->library('upload', $config); //Load the upload CI library
-        $this->upload->overwrite = true; //image overwrite
-        if (!$this->upload->do_upload('proof')) {
-            $uploadError = array('upload_error' => $this->upload->display_errors());
+        if ($filename == '') {
+            $data1 = array(
+                'p_fname' => $this->input->post('p_fname'),
+                'p_mname' => $this->input->post('p_mname'),
+                'p_surname' => $this->input->post('p_surname'),
+                's_mothername' => $this->input->post('s_mothername'),
+                'p_mobno1' => $this->input->post('p_mobno1'),
+                'p_mobno2' => $this->input->post('p_mobno2'),
+                'village' => $this->input->post('village'),
+                'taluka' => $this->input->post('taluka'),
+                'district' => $this->input->post('district'),
+                'state' => $this->input->post('state'),
+                'pin_code' => $this->input->post('pin_code'),
+                'address' => $this->input->post('address'),
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+                'medium' => $this->input->post('medium'),
+                'class_id' => $this->input->post('class_id'),
+                's_id' => $this->input->post('s_id'),
+            );
+        } else {
+            $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $image = $id . "." . $file_ext;
+            $type = explode('.', $_FILES['proof']['name']);
+            $type = $type[count($type) - 1];
+            $url = "Parents/" . $image;
+            $config['upload_path'] = './Parents/'; //The path where the image will be save
+            $config['allowed_types'] = 'jpg|jpeg|png|gif'; //Images extensions accepted
+            $config['file_name'] = $image;
+            $this->load->library('upload', $config); //Load the upload CI library
+            $this->upload->overwrite = true; //image overwrite
+            if (!$this->upload->do_upload('proof')) {
+                $uploadError = array('upload_error' => $this->upload->display_errors());
+            }
+            $data1 = array(
+                'p_fname' => $this->input->post('p_fname'),
+                'p_mname' => $this->input->post('p_mname'),
+                'p_surname' => $this->input->post('p_surname'),
+                's_mothername' => $this->input->post('s_mothername'),
+                'p_mobno1' => $this->input->post('p_mobno1'),
+                'p_mobno2' => $this->input->post('p_mobno2'),
+                'village' => $this->input->post('village'),
+                'taluka' => $this->input->post('taluka'),
+                'district' => $this->input->post('district'),
+                'state' => $this->input->post('state'),
+                'pin_code' => $this->input->post('pin_code'),
+                'address' => $this->input->post('address'),
+                'proof' => $image,
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+                'medium' => $this->input->post('medium'),
+                'class_id' => $this->input->post('class_id'),
+                's_id' => $this->input->post('s_id'),
+            );
         }
-        $data1 = array(
-            'p_fname' => $this->input->post('p_fname'),
-            'p_mname' => $this->input->post('p_mname'),
-            'p_surname' => $this->input->post('p_surname'),
-            's_mothername' => $this->input->post('s_mothername'),
-            'p_mobno1' => $this->input->post('p_mobno1'),
-            'p_mobno2' => $this->input->post('p_mobno2'),
-            'village' => $this->input->post('village'),
-            'taluka' => $this->input->post('taluka'),
-            'district' => $this->input->post('district'),
-            'state' => $this->input->post('state'),
-            'pin_code' => $this->input->post('pin_code'),
-            'address' => $this->input->post('address'),
-            'proof' => $image,
-            'username' => $this->input->post('username'),
-            'password' => md5($this->input->post('password')),
-            'medium' => $this->input->post('medium'),
-            'class_id' => $this->input->post('class_id'),
-            's_id' => $this->input->post('s_id'),
-        );
         $this->parents->update_parents($id, $data1);
         redirect(base_url('Add_parents/'));
     }

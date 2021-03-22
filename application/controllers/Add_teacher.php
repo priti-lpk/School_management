@@ -90,35 +90,53 @@ class Add_teacher extends CI_Controller {
         $this->form_validation->set_rules('username', 'username', 'required');
         $this->form_validation->set_rules('password', 'password', 'required');
         $filename = $_FILES["t_image"]["name"];
-        $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $image = $id . "." . $file_ext;
-        $type = explode('.', $_FILES['t_image']['name']);
-        $type = $type[count($type) - 1];
-        $url = "Teachers/" . $image;
-        $config['upload_path'] = './Teacher/'; //The path where the image will be save
-        $config['allowed_types'] = 'jpg|jpeg|png|gif'; //Images extensions accepted
-        $config['file_name'] = $image;
-        $this->load->library('upload', $config); //Load the upload CI library
-        $this->upload->overwrite = true; //image overwrite
-        if (!$this->upload->do_upload('t_image')) {
-            $uploadError = array('upload_error' => $this->upload->display_errors());
+        if ($filename == '') {
+            $data1 = array(
+                't_fname' => $this->input->post('t_fname'),
+                't_lastname' => $this->input->post('t_lastname'),
+                't_mobno' => $this->input->post('t_mobno'),
+                'village' => $this->input->post('village'),
+                'taluka' => $this->input->post('taluka'),
+                'district' => $this->input->post('district'),
+                'state' => $this->input->post('state'),
+                'pincode' => $this->input->post('pincode'),
+                'address' => $this->input->post('address'),
+                't_religion' => $this->input->post('t_religion'),
+                'joining_date' => $this->input->post('joining_date'),
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+            );
+        } else {
+            $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $image = $id . "." . $file_ext;
+            $type = explode('.', $_FILES['t_image']['name']);
+            $type = $type[count($type) - 1];
+            $url = "Teachers/" . $image;
+            $config['upload_path'] = './Teachers/'; //The path where the image will be save
+            $config['allowed_types'] = 'jpg|jpeg|png|gif'; //Images extensions accepted
+            $config['file_name'] = $image;
+            $this->load->library('upload', $config); //Load the upload CI library
+            $this->upload->overwrite = true; //image overwrite
+            if (!$this->upload->do_upload('t_image')) {
+                $uploadError = array('upload_error' => $this->upload->display_errors());
+            }
+            $data1 = array(
+                't_fname' => $this->input->post('t_fname'),
+                't_lastname' => $this->input->post('t_lastname'),
+                't_mobno' => $this->input->post('t_mobno'),
+                'village' => $this->input->post('village'),
+                'taluka' => $this->input->post('taluka'),
+                'district' => $this->input->post('district'),
+                'state' => $this->input->post('state'),
+                'pincode' => $this->input->post('pincode'),
+                'address' => $this->input->post('address'),
+                't_religion' => $this->input->post('t_religion'),
+                'joining_date' => $this->input->post('joining_date'),
+                't_image' => $image,
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+            );
         }
-        $data1 = array(
-            't_fname' => $this->input->post('t_fname'),
-            't_lastname' => $this->input->post('t_lastname'),
-            't_mobno' => $this->input->post('t_mobno'),
-            'village' => $this->input->post('village'),
-            'taluka' => $this->input->post('taluka'),
-            'district' => $this->input->post('district'),
-            'state' => $this->input->post('state'),
-            'pincode' => $this->input->post('pincode'),
-            'address' => $this->input->post('address'),
-            't_religion' => $this->input->post('t_religion'),
-            'joining_date' => $this->input->post('joining_date'),
-            't_image' => $image,
-            'username' => $this->input->post('username'),
-            'password' => md5($this->input->post('password')),
-        );
         $this->teacher->update_teacher($id, $data1);
         redirect(base_url('Add_teacher/'));
     }
